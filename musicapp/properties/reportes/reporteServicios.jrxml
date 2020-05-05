@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="612" pageHeight="792" columnWidth="602" leftMargin="5" rightMargin="5" topMargin="1" bottomMargin="20" uuid="3ba1c244-9711-45b8-816e-a5ce207f8188">
+	<property name="ireport.zoom" value="1.2100000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="384"/>
+	<property name="ireport.background.image" value="/home/victor/Projects/Eclipse/EMPRESA/musicapp/properties/reportes/imagenEsferaBack.png"/>
+	<property name="ireport.background.image.properties" value="true,true,0.25,294,1417,0,267,310,341"/>
+	<parameter name="img_logo" class="java.io.InputStream"/>
+	<parameter name="img_back" class="java.io.InputStream"/>
+	<parameter name="solicitante" class="java.lang.String"/>
+	<parameter name="representante" class="java.lang.String"/>
+	<parameter name="direccionSolicitante" class="java.lang.String"/>
+	<parameter name="telefono" class="java.lang.String"/>
+	<parameter name="celular" class="java.lang.String"/>
+	<parameter name="diaEvento" class="java.lang.String"/>
+	<parameter name="horario" class="java.lang.String"/>
+	<parameter name="direccionEvento" class="java.lang.String"/>
+	<parameter name="cantidad" class="java.lang.String"/>
+	<parameter name="anticipo" class="java.lang.String"/>
+	<parameter name="restante" class="java.lang.String"/>
+	<parameter name="grupo" class="java.lang.String"/>
+	<parameter name="dia" class="java.lang.String"/>
+	<parameter name="mes" class="java.lang.String"/>
+	<parameter name="year" class="java.lang.String"/>
+	<parameter name="CONTEXT" class="java.lang.String"/>
+	<background>
+		<band height="752" splitType="Stretch">
+			<image scaleImage="RetainShape" vAlign="Bottom" isUsingCache="false">
+				<reportElement positionType="Float" mode="Transparent" x="264" y="415" width="338" height="337" isPrintInFirstWholeBand="true" uuid="42c96db8-4afd-4834-ba69-6b211df0c42f"/>
+				<imageExpression><![CDATA["/home/victor/Projects/Eclipse/EMPRESA/musicapp/properties/reportes/imagenEsferaBack.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="2" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="42" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="602" height="42" backcolor="#2D84DF" uuid="0b66a28b-017e-431e-9ea0-2bff847ed0d8"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="10" y="0" width="592" height="36" backcolor="#E0E000" uuid="64d243c3-4474-4969-ac83-0342f65bc905"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="10" y="0" width="546" height="28" uuid="28a62071-7403-48f8-a235-10e38907cbae"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTRATO DE SERVICIO ESPECTÁCULOS DE GRUPO]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="3" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="658" splitType="Stretch">
+			<staticText>
+				<reportElement x="53" y="110" width="503" height="34" uuid="b46a1ca2-9148-4dfc-bb1c-0616def089fc"/>
+				<textElement>
+					<font size="13" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ 				CELEBRAN EL PRESENTE CONTRATO; POR UNA PARTE EL ING. JESÚS VELA GUZMÁN ]]></text>
+			</staticText>
+			<break>
+				<reportElement x="0" y="631" width="100" height="1" uuid="6bd43b9f-dd7e-4fba-a5f1-7d868edbf332"/>
+			</break>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" isPrintRepeatedValues="false" x="274" y="18" width="305" height="50" uuid="ce0e9317-9648-40b8-b10f-10bd638c1e51"/>
+				<textElement textAlignment="Left" markup="html">
+					<font size="14" isBold="true" isItalic="false" isUnderline="false"/>
+					<paragraph lineSpacing="AtLeast"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Cuernavaca Morelos A <u>&nbsp;"+$P{dia} +"&nbsp;</u> de <u>&nbsp;"+$P{mes} +"&nbsp;</u>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="53" y="144" width="181" height="22" uuid="c8e6965f-b32d-4e1f-a5b1-e92a39a93f38"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[REPRESENTANTE DE: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="170" width="342" height="23" uuid="8f95e365-1c0c-4802-8db8-e551bef3bb62"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Y POR LA OTRA EL SOLICITANTE DEL EVENTO: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="212" y="144" width="344" height="20" uuid="f993fe7e-fed7-4423-ad3b-4ded1225a281"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{representante}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="212" y="163" width="344" height="1" uuid="5e6521e2-3152-48a9-9cca-77a4049b51e8"/>
+			</line>
+			<staticText>
+				<reportElement x="53" y="225" width="135" height="23" uuid="c71ce541-6e23-4dcb-a54f-39887b3bc8b7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[CON DIRECCIÓN: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="253" width="86" height="23" uuid="86a3dc31-ed4e-41c7-a442-856a9b4bbe40"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[TELEFONO: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="308" y="253" width="69" height="23" uuid="13812d67-ce6e-4cde-b739-6355eacbe727"/>
+				<textElement verticalAlignment="Middle">
+					<font size="13" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[CELULAR: ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="395" y="192" width="161" height="1" uuid="0a1c2585-9ae7-431e-963c-295735cca542"/>
+			</line>
+			<line>
+				<reportElement x="176" y="247" width="380" height="1" uuid="03b25ceb-e6cc-4d4b-ac6f-3388e489984e"/>
+			</line>
+			<line>
+				<reportElement x="139" y="276" width="169" height="1" uuid="bbc44424-3799-417d-8e35-e7cd2713a429"/>
+			</line>
+			<line>
+				<reportElement x="377" y="276" width="179" height="1" uuid="961e7eda-95e2-49b5-b86c-99740e761125"/>
+			</line>
+			<line>
+				<reportElement x="-3" y="350" width="384" height="1" forecolor="#2D84DF" uuid="39d5d2ae-0c01-4252-9b0a-55afebb3f102"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="180" y="327" width="260" height="20" uuid="9da46313-7f9e-44e3-afaa-2be045364678"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DETALLES DE CONTRATO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="53" y="220" width="503" height="1" uuid="0700fe82-8dd9-4a3a-abe7-98f23ed8246b"/>
+			</line>
+			<staticText>
+				<reportElement x="39" y="432" width="367" height="20" uuid="977a8eb2-c2c2-4168-95aa-6c247fb715d5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[SE COMPROMETE A PRESTAR SUS SERVICIOS EL DIA: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="39" y="462" width="161" height="20" uuid="6b457182-e3c8-4976-b218-6a01c19d5ba5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[CON UN HORARIO DE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="39" y="493" width="116" height="20" uuid="31ea26b0-98d4-437c-82cf-82d52d76f371"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[CON DIRECCIÓN:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="39" y="524" width="178" height="20" uuid="fddb898f-cf2d-40d4-924c-56637f4a01a4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[POR LA CANTIDAD DE: $]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="39" y="554" width="178" height="20" uuid="2f4af550-e00f-4d04-bfa3-755d9c4d4d40"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[CON UN ANTICIPO DE: $]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="39" y="584" width="216" height="20" uuid="cb58e649-1243-4afe-ba5b-3dd9b1017525"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[RESTANDO LA CANTIDAD DE: $]]></text>
+			</staticText>
+			<line>
+				<reportElement x="188" y="482" width="368" height="1" uuid="0ad6e3b0-d524-46e3-bd14-89454be08d3d"/>
+			</line>
+			<line>
+				<reportElement x="155" y="513" width="401" height="1" uuid="51d73f28-73d3-45c9-b125-a259afaa8e28"/>
+			</line>
+			<line>
+				<reportElement x="188" y="544" width="368" height="1" uuid="e227c902-406c-4d95-b90b-b90fc3e18287"/>
+			</line>
+			<line>
+				<reportElement x="188" y="573" width="368" height="1" uuid="6eb71e07-79cb-4edd-9536-0ef1c16deef6"/>
+			</line>
+			<line>
+				<reportElement x="234" y="604" width="322" height="1" uuid="da7803f0-2e81-4a05-bdac-42cc83cb404c"/>
+			</line>
+			<line>
+				<reportElement x="406" y="452" width="150" height="1" uuid="724bdf71-ada1-4e53-bdd9-3b0b2ca87786"/>
+			</line>
+			<line>
+				<reportElement x="39" y="399" width="517" height="1" forecolor="#2D84DF" uuid="db642660-c9b7-4810-a649-d948a69a2428"/>
+			</line>
+			<textField>
+				<reportElement x="53" y="201" width="503" height="20" uuid="4ef32988-90cd-497d-a680-2b2490ddc8e6"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{solicitante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="184" y="228" width="372" height="20" uuid="0fa3eb3d-c26e-417d-822d-c0a8c0136759"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{direccionSolicitante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="139" y="257" width="152" height="20" uuid="4f413b2b-2a39-4a51-9b62-026eb395b94a"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="381" y="257" width="175" height="20" uuid="1c1f575a-ca04-46c6-9589-0c008b8bcd1f"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{celular}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="406" y="433" width="150" height="20" uuid="e781c76c-e857-47fd-8d0a-0f00cbcdfafe"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{diaEvento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="463" width="356" height="20" uuid="131c301c-57e8-4611-8d3b-3a397035033b"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{horario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="155" y="494" width="401" height="20" uuid="187e90c5-5728-41df-b1c3-cfc5ff0e549a"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{direccionEvento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="208" y="525" width="169" height="20" uuid="ea40fd87-8716-4ac2-8449-43b220c7d4ba"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="208" y="554" width="169" height="20" uuid="53970445-3989-4843-a681-24e7863d8e39"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{anticipo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="255" y="585" width="122" height="20" uuid="a4c1c78f-4904-432e-8069-ce32bd0fb170"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{restante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" isPrintRepeatedValues="false" x="274" y="41" width="231" height="29" uuid="b9d20374-4c2c-47d2-8c59-6c1d6ba009f6"/>
+				<textElement textAlignment="Left" markup="html">
+					<font size="14"/>
+					<paragraph lineSpacing="AtLeast"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" del <u>&nbsp;&nbsp;"+$P{year} +"&nbsp;&nbsp;</u>"]]></textFieldExpression>
+			</textField>
+			<image scaleImage="RealSize" vAlign="Middle" onErrorType="Icon">
+				<reportElement positionType="Float" x="37" y="0" width="233" height="110" uuid="901f3765-ef06-405d-b03c-ff8dd1bfa445"/>
+				<imageExpression><![CDATA[$P{img_logo}]]></imageExpression>
+			</image>
+		</band>
+		<band height="643">
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="29" y="104" width="517" height="327" uuid="6c88f9e6-2be4-4643-9767-b46220f210d2"/>
+				<textElement textAlignment="Justified" markup="html">
+					<font size="10" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<P>1.-EL CONTRATANTE NO DEBE HACER  NINGÚN TIPO DE PUBLICIDAD SIN ANTES HABER CONFIRMADO LA FIRMA DEL CONTRATO.</P></n>"+
+"<P>2.-LA CANCELACIÓN POR PARTE DEL CONTRATANTE TENDRÁ QUE SER COMO MÍNIMO DE 30 DÍAS, EN CASO DE NO SER ASÍ EL CONTRATANTE TENDRÁ QUE PAGAR 50% DEL CONTRATO O PERDER SU ANTICIPO.</P></n>"+
+"<P>3.- EN CASO DE QUE EL CONTRATANTE NO  CUENTE CON EL PERMISO PARA REALIZAR DICHO EVENTO Y POR LO CUAL SE CANCELE EL EVENTO  TENDRÁ QUE PAGAR EL 100% DEL CONTRATO O EN CASO DE ALGUNA FALLA ELÉCTRICA, LLUVIA,  RIÑA  O SINIESTROS  LA EMPRESA AMERICAN MUSIC NO SE HACE RESPONSABLE.</P></n>"+
+"<P>4.- EL CONTRATANTE DEBERÁ PAGAR SINDICATOS DE MÚSICOS AUTORES Y COMPOSITORES, IMPUESTOS FEDERALES Y ESTATALES CON LAS AUTORIDADES  QUE LE CORRESPONDA.</P></n>"+
+"<P>5.-AL NO PAGAR PUNTUALMENTE LOS ANTICIPOS DE DINERO Y AL NO PAGAR ANTES DE LA ACTUACIÓN DE:   <u>&nbsp;&nbsp;"+$P{grupo} +"&nbsp;&nbsp;</u>   DEJA EN LIBERTAD A \"ESFERA MUSICAL\" DE CANCELAR EL PRESENTE CONTRATO.</P></n>"+
+"<P>6.-AMBAS PARTES QUEDAN SUJETAS A LAS SANCIONES QUE MARCA LA LEY RESPECTIVA POR LO TANTO AMBAS PARTES ACEPTAN TRIBUNALES COMPETENTES CORRESPONDIENTES.</P></n>"+
+"<P>7.- QUEDANDO ENTERADOS LA EMPRESA  Y EL CONTRATANTE, QUEDAN SUJETAS A LAS CLAUSULA ANTERIORES Y FIRMAN EL PRESENTE CONTRATO.</P></n>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="212" y="480" width="143" height="20" uuid="12a801f3-d4f1-4fa6-8f39-9c8f7095987b"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[A T E N T A M E N TE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="0" width="517" height="20" uuid="638883c3-7dcb-4562-b63c-b180c9eea175"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[QUE DEBE QUEDAR CUBIERTA ANTES DE LA ACTUACIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="55" width="517" height="20" uuid="6abc3cbd-34d2-48b4-ab84-d4c8a234354a"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[CLAUSULAS DEL CONTRATO]]></text>
+			</staticText>
+			<line>
+				<reportElement x="78" y="571" width="177" height="1" uuid="9a7e2a2c-80ba-455d-a908-c63281e57d28"/>
+			</line>
+			<line>
+				<reportElement x="335" y="571" width="177" height="1" uuid="cd8811d5-09b5-4972-a55f-8c1f3a0d4765"/>
+			</line>
+			<staticText>
+				<reportElement x="117" y="581" width="100" height="20" uuid="cf61c3f5-2511-4115-89b1-e1936d7d78a8"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPRESENTANTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="377" y="581" width="100" height="20" uuid="14a72721-8edb-4235-8d8b-64ebb7038371"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTRATANTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="78" y="620" width="177" height="20" uuid="8f185e80-a4b6-42f1-bcdb-c086dca0c572"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ING. JESUS VELA GUZMAN]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="5" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="42" splitType="Stretch">
+			<line>
+				<reportElement x="39" y="3" width="507" height="1" uuid="126fa633-cdff-430d-8c54-399b910912d1"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineColor="#421A1A"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="39" y="5" width="507" height="1" uuid="cf4c42a8-df97-4d27-ac33-df921286a21f"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="85" y="6" width="433" height="16" uuid="de60d8e7-38c0-458d-8112-fd5a0bc4f2fa"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[   Oficina Cuernavaca: 01 777 3229567– 7771143440 – 7772888775]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="22" width="433" height="20" uuid="dfdbc2d7-7096-45e8-97b9-5532938dca5c"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[01 800 83 13 304   E MAIL: ammericanmusic@hotmail.com]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="3" splitType="Stretch"/>
+	</summary>
+</jasperReport>

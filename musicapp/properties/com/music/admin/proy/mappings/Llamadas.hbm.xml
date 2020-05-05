@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping  default-cascade="none" default-lazy="true">
+    <class  catalog="musicapp" name="com.music.admin.proy.vo.Llamadas" table="LLAMADAS">
+        <id name="llamadaId" >
+            <column name="LLAMADA_ID"/>
+            <generator class="identity"/>
+        </id>
+<!--         <property  name="clienteId" > -->
+<!--             <column name="CLIENTE_ID" /> -->
+<!--         </property> -->
+<!--         <property  name="empleadoId" > -->
+<!--             <column name="EMPLEADO_ID" /> -->
+<!--         </property> -->
+	    <many-to-one fetch="select" class="com.music.admin.proy.vo.Empleados" name="empleado" not-found="exception" update="false">
+            <column name="EMPLEADO_ID"/>
+        </many-to-one>
+        <many-to-one fetch="select" class="com.music.admin.proy.vo.Clientes"  name="cliente" not-found="exception" update="false">
+            <column name="CLIENTE_ID"/>
+        </many-to-one>
+        <property  name="fecha" >
+            <column name="FECHA" />
+        </property>
+        <property  name="hora" >
+            <column name="HORA" />
+        </property>
+        <property  name="detalleLlamada" >
+            <column name="DETALLE_LLAMADA" />
+        </property>
+
+    </class>
+</hibernate-mapping>

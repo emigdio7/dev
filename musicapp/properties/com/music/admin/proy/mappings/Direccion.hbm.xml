@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-cascade="none" default-lazy="false">
+    <class catalog="musicapp"  mutable="true" name="com.music.admin.proy.vo.Direccion" polymorphism="implicit" table="DIRECCION">
+    
+        <id name="direccionId" >
+            <column name="DIRECCION_ID"/>
+            <generator class="identity"/>
+        </id>
+        <property name="calle" type="string" >
+            <column length="20" name="CALLE" />
+        </property>
+        <property name="colonia" type="string" >
+            <column length="30" name="COLONIA" />
+        </property>
+        <property name="ciudad" type="string" >
+            <column length="30" name="CIUDAD" />
+        </property>
+        <property name="estado" type="string" >
+            <column length="15" name="ESTADO" />
+        </property>
+        <property name="codigop" >
+            <column name="CODIGOP"/>
+        </property>
+        <property name="usuarioAlta" >
+            <column name="USUARIO_ALTA"/>
+        </property>
+
+<!--         <set  fetch="select" inverse="true" lazy="true" mutable="true" name="usuarioses" sort="unsorted" table="USUARIOS"> -->
+<!--             <key on-delete="noaction"> -->
+<!--                 <column name="DIRECCION_ID"/> -->
+<!--             </key> -->
+<!--             <one-to-many class="com.music.admin.proy.vo.Usuario"  not-found="exception"/> -->
+<!--         </set> 
+         -->
+          <set  fetch="select" inverse="true" lazy="true" mutable="true" name="provedoreses" sort="unsorted" table="PROVEEDORES">
+            <key on-delete="noaction">
+                 <column name="DIRECCION_ID" />
+             </key> 
+             <one-to-many class="com.music.admin.proy.vo.Proveedores"  not-found="exception"/>
+         </set> 
+       
+    </class>
+</hibernate-mapping>

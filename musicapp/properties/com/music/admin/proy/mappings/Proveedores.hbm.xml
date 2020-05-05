@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-cascade="none" default-lazy="false">
+    <class catalog="musicapp"   mutable="true" name="com.music.admin.proy.vo.Proveedores" polymorphism="implicit" table="PROVEEDORES">
+    
+        <id name="provedorId" type="java.lang.Integer">
+            <column name="PROVEEDOR_ID"/>
+            <generator class="identity"/>
+        </id>
+        
+        <many-to-one class="com.music.admin.proy.vo.Direccion" fetch="join" name="direccion" cascade="save-update" not-found="exception"  update="true">
+            <column name="DIRECCION_ID" not-null="false"/>
+        </many-to-one>
+        
+        <property name="nombre" type="string" >
+            <column length="40" name="NOMBRE" not-null="true"/>
+        </property>
+        <property name="telefono" type="string" >
+            <column length="15" name="TELEFONO" not-null="true"/>
+        </property>
+        <property name="correo" type="string" >
+            <column length="40" name="CORREO" not-null="true"/>
+        </property>
+        <property name="categoria" type="string" >
+            <column length="40" name="CATEGORIA" not-null="true"/>
+        </property>
+        <property name="observaciones" type="string" >
+            <column length="400" name="OBSERVACIONES" not-null="true"/>
+        </property>
+        <property name="imagenMobiliario" type="string" >
+            <column name="IMAGEN_MOLILIARIO"/>
+        </property>	
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-cascade="none" default-lazy="true">
+    <class catalog="musicapp"  mutable="true" name="com.music.admin.proy.vo.Eventos"  polymorphism="implicit" table="EVENTOS">
+        
+        <id name="eventoId" type="java.lang.Integer">
+            <column name="EVENTO_ID"/>
+            <generator class="identity"/>
+        </id>
+
+        <property name="grupo" >
+            <column  name="GRUPO" />
+        </property>
+                
+        <property name="contrato" >
+            <column name="CONTRATO" />
+        </property>
+        <property name="anticipo" >
+            <column name="ANTICIPO" />
+        </property>
+        <property name="restante" >
+            <column name="RESTANTE" />
+        </property>        
+        <property name="telefono" >
+            <column name="TELEFONO"/>
+        </property>
+
+        <property name="fechaEvento" >
+            <column  name="FECHA_EVENTO" />
+        </property>
+        <property name="lugarEvento" >
+            <column name="LUGAR_EVENTO" />
+        </property>
+        <property name="horaInicio" >
+            <column name="HORA_INICIO" />
+        </property>
+        <property name="horaFin" >
+            <column name="HORA_FIN" />
+        </property>
+        <property name="chofer" >
+            <column name="CHOFER"/>
+        </property>
+        <property name="camioneta" >
+            <column name="CAMIONETA"/>
+        </property>
+        <property name="usuarioAlta" >
+            <column name="USUARIO_ALTA"/>
+        </property>
+        <property name="clienteId" >
+            <column name="CLIENTE_ID"/>
+        </property>
+        <property name="activo" >
+            <column name="ACTIVO"/>
+        </property>
+        <many-to-one class="com.music.admin.proy.vo.TipoEvento" fetch="select" insert="false" name="tipoEvento" not-found="exception" update="false">
+            <column name="TIPO_EVENTO_ID"/>
+        </many-to-one>
+     <property name="category" >
+            <column name="CATEGORY"/>
+        </property>  
+        
+        
+    </class>
+</hibernate-mapping>

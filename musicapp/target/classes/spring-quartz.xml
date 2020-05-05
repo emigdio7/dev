@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<beans:beans xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.2.xsd 
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd
+        http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util-4.2.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">		
+ 
+	<!-- Definición de jobs -->
+	<!-- Un job necesita de un identificador único -->
+	<beans:bean id="uniqueJobIdentifier" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+	      <!-- Es necesario indicar la clase que contienen tu tarea -->
+	      <beans:property name="jobClass" value="com.music.admin.proy.jobs.EnvioEmailJob" />
+	      <!-- También indicaremos aquellos servicios que se usarán en la tarea, en caso de que se requiera de alguno, para que Spring los incluya en el contexto -->
+	      <beans:property name="jobDataMap">
+	            <beans:map>
+<!-- 	                  <beans:entry key ="customService" value-ref="customServiceImpl"/> -->
+	                  <beans:entry key ="emailService" value-ref="emailService"/>
+	            </beans:map>
+	      </beans:property>
+	      <beans:property name="durability" value="true" />
+	</beans:bean>
+	<!-- ... otros jobs -->
+	 
+	 
+	<!-- Definición de Triggers -->
+	<!-- Un trigger necesita de un identifiacor único -->
+	<beans:bean id="uniqueTriggerIdentifier" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	      <!-- Un trigger se asocia a un job mediante su identificador único -->
+	      <beans:property name="jobDetail" ref="uniqueJobIdentifier"/>
+	      <!-- Existen varias posibilidades en este punto. Nosotros trabajamos con expresiones cron definidas en un fichero properties para usar diferentes configuraciones según el entorno de ejecución -->
+	      <beans:property name="cronExpression" value="${properties.uniqueTriggerIdentifier.cronExpression}" />
+<!-- 	      <beans:property name="cronExpression" value="0/2 * * * * ?" /> -->
+	</beans:bean>
+	<!-- ... otros triggers -->
+	 
+	 
+	<!-- Configuración del sistema -->
+	<!-- Finalmente usaremos la clase SchedulerFactoryBean de Quartz para programar e iniciar el sistema de tareas -->
+	<beans:bean id="schedulerFactory" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	      <beans:property name="jobDetails">
+	            <!-- En esta lista añadiremos todos los jobs definidos previamente -->
+	            <beans:list>                  
+	                  <beans:ref bean="uniqueJobIdentifier"/>
+	            </beans:list>
+	      </beans:property>
+	      <beans:property name="triggers">
+	            <!-- En esta lista añadiremos todos los triggers definidos previamente -->
+	            <beans:list>
+	                  <beans:ref bean="uniqueTriggerIdentifier"/>
+	            </beans:list>
+	      </beans:property>
+	</beans:bean>
+ 
+</beans:beans>

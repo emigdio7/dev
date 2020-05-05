@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<beans:beans xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.2.xsd 
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd
+        http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util-4.2.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+        http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">		
+
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+    <context:component-scan base-package="com.music.admin.proy.services"/>
+	
+	<context:component-scan base-package="com.music.admin.proy.daos" />
+    
+    <context:component-scan base-package="com.music.admin.proy.views" />
+    
+    
+    <util:properties id="propiedades" location="classpath:/procesa.properties" />
+        
+    <context:property-placeholder properties-ref="propiedades" />
+    
+    <!-- base de datos -->
+	<beans:import resource="classpath:daoContext.xml"/>
+	    
+<!-- 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" -->
+<!-- 		destroy-method="close"> -->
+<!-- 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" /> -->
+<!-- 		<beans:property name="url" -->
+<!-- 			value="jdbc:oracle:thin:@${pruebas.datasource.server.ip}:${pruebas.datasource.server.port}/${pruebas.datasource.server.instancia}" /> -->
+<!-- 		<beans:property name="username" value="${pruebas.datasource.server.username}" /> -->
+<!-- 		<beans:property name="password" value="${pruebas.datasource.server.password}" /> -->
+<!-- 	</beans:bean> -->
+
+<!-- 	<bean id="sessionFactory" -->
+<!-- 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"> -->
+<!-- 		<property name="dataSource" ref="dataSource" /> -->
+<!--  		<property name="mappingResources" ref="hibernateMappingResources" /> -->
+<!-- 		<property name="hibernateProperties"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="hibernate.format_sql">true</prop> -->
+<!-- 				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop> -->
+<!-- 				<prop key="hibernate.show_sql">true</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 		<property name="jtaTransactionManager" ref="transactionManager" /> -->
+<!-- 	</bean>	 -->
+
+	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close"> 
+		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<beans:property name="url" 	value="jdbc:mysql://localhost:3306/musicapp?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Amsterdam&amp;useSSL=false" />
+		<beans:property name="username" value="root" />
+		<beans:property name="password" value="12345" />
+		<beans:property name="initialSize" value="5" />
+   		<beans:property name="maxActive" value="10" />
+	</beans:bean>
+				
+	<beans:bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="mappingResources" ref="mappingResources" />
+		<beans:property name="hibernateProperties">
+			<beans:props>
+
+				<beans:prop key="hibernate.format_sql">true</beans:prop>
+				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</beans:prop>
+		        <beans:prop key="hibernate.show_sql">true</beans:prop>
+
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+	
+	<beans:bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<beans:property name="sessionFactory" ref="sessionFactory" />
+	</beans:bean>
+	
+    
+	<beans:bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<beans:property name="dataSource" ref="dataSource" />
+	</beans:bean>	
+			
+</beans:beans>
+

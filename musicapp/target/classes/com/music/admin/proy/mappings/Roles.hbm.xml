@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-cascade="none" default-lazy="true">
+    <class catalog="musicapp"  mutable="true" name="com.music.admin.proy.vo.Rol"  table="ROLES">
+        <id name="rolId" type="java.lang.Integer">
+            <column name="ROL_ID"/>
+            <generator class="identity"/>
+        </id>
+        <property name="descripcion" type="string">
+            <column length="30" name="DESCRIPCION" not-null="true"/>
+        </property>
+        <property name="activo" type="java.lang.Integer">
+            <column name="ACTIVO"/>
+        </property>
+        <property name="claveEmpleado" type="string">
+            <column name="CLAVE_EMPLEADO"/>
+        </property>   
+        <!-- 
+        <property name="classLabel" type="string">
+            <column name="CLASS_LABEL"/>
+        </property>
+         -->
+        
+    </class>
+</hibernate-mapping>

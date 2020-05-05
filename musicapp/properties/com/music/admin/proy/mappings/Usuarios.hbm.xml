@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-cascade="none" default-lazy="true">
+    <class catalog="musicapp" mutable="true" name="com.music.admin.proy.vo.Usuario" polymorphism="implicit" table="USUARIOS">
+    
+        <id name="nombreUsuario" type="string">
+            <column name="NOMBRE_USUARIO"/>
+<!--             <generator class="identity"/> -->
+        </id>
+        <many-to-one class="com.music.admin.proy.vo.Direccion" fetch="select" insert="true" name="direccion" not-found="exception" update="true">
+            <column name="DIRECCION_ID"/>
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column length="30" name="NOMBRE" not-null="true"/>
+        </property>
+        <property name="apellidos" type="string">
+            <column length="40" name="APELLIDOS" not-null="true"/>
+        </property>
+        <property name="telefono" type="string">
+            <column length="15" name="TELEFONO" not-null="true"/>
+        </property>
+        <property name="correo" type="string">
+            <column length="40" name="CORREO" not-null="true"/>
+        </property>
+        <property name="rol" type="java.lang.Integer">
+            <column name="ROL"/>
+        </property>
+        <property name="usuarioAlta" type="string">
+            <column name="USUARIO_ALTA"/>
+        </property>
+        <property name="enabled" >
+            <column name="ENABLED" not-null="true"/>
+        </property>
+        <property name="passwordd" type="string">
+            <column name="PASSWORDD"/>
+        </property>
+        
+<!--         <set fetch="select" inverse="true" lazy="true" mutable="true" name="llamadases" sort="unsorted" table="LLAMADAS"> -->
+<!--             <key on-delete="noaction"> -->
+<!--                 <column name="USUARIO_ID"/> -->
+<!--             </key> -->
+<!--             <one-to-many class="com.music.admin.proy.vo.Llamadas" not-found="exception"/> -->
+<!--         </set> -->
+
+        <set fetch="select" inverse="true" lazy="true" mutable="true" name="authorities" sort="unsorted" table="AUTHORITIES">
+            <key on-delete="noaction">
+                <column name="NOMBRE_USUARIO"/>
+            </key>
+            <one-to-many class="com.music.admin.proy.vo.Authorities" not-found="exception"/>
+        </set>
+                
+    </class>
+</hibernate-mapping>

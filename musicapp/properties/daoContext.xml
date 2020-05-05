@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+	
+	<!-- configuracion de acceso a la base de datos -->
+	
+	<!-- hibernate mapping resources -->
+	
+	<util:list id="mappingResources">				
+		<value>com/music/admin/proy/mappings/Clientes.hbm.xml</value>
+		<value>com/music/admin/proy/mappings/Direccion.hbm.xml</value>
+		<value>com/music/admin/proy/mappings/Eventos.hbm.xml</value>
+		<value>com/music/admin/proy/mappings/Llamadas.hbm.xml</value>
+		<value>com/music/admin/proy/mappings/TipoEvento.hbm.xml</value>
+		<value>com/music/admin/proy/mappings/Usuarios.hbm.xml</value>
+		<value>com/music/admin/proy/mappings/Roles.hbm.xml</value>
+		<value>com/music/admin/proy/mappings/Empleados.hbm.xml</value>
+		<value>com/music/admin/proy/mappings/Authorities.hbm.xml</value>
+	   <value>com/music/admin/proy/mappings/Proveedores.hbm.xml</value>
+		   
+	</util:list>
+	
+<!-- 	<bean id="sessionFactory" -->
+<!-- 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"> -->
+<!-- 		<property name="dataSource" ref="dataSource" /> -->
+<!--  		<property name="mappingResources" ref="hibernateMappingResources" /> -->
+<!-- 		<property name="hibernateProperties"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="hibernate.format_sql">true</prop> -->
+<!-- 				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop> -->
+<!-- 				<prop key="hibernate.show_sql">true</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 		<property name="jtaTransactionManager" ref="transactionManager" /> -->
+<!-- 	</bean>	 -->
+	
+<!-- 	<jee:jndi-lookup id="dataSource" jndi-name="siirfe.aplicaciones.credencial.distribucion.DS"  -->
+<!-- 	expected-type="javax.sql.DataSource" /> -->
+	
+</beans>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-cascade="none" default-lazy="true">
+    <class catalog="musicapp"  mutable="true" name="com.music.admin.proy.vo.Empleados" table="EMPLEADOS">
+    
+        <id name="empleadoId">
+            <column name="EMPLEADO_ID"/>
+            <generator class="identity"/>
+        </id>
+        
+        <property name="nombre" >
+            <column name="NOMBRE" />
+        </property>
+        <property name="apellidoPat" >
+            <column name="APELLIDO_PAT"/>
+        </property>
+        <property name="apellidoMat" >
+            <column name="APELLIDO_MAT"/>
+        </property>
+        <many-to-one class="com.music.admin.proy.vo.Direccion" fetch="join" lazy="false" name="direccion" update="true">
+            <column name="DIRECCION_ID" not-null="true"/>
+        </many-to-one>
+        <property name="telefono" >
+            <column name="TELEFONO"/>
+        </property>
+        <property name="correo" >
+            <column name="CORREO" />
+        </property>
+        <many-to-one class="com.music.admin.proy.vo.Rol" fetch="join" lazy="false"  name="rol" update="true">
+            <column name="ROL_ID" />
+        </many-to-one>
+        <property name="claveEmpleado" >
+            <column name="CLAVE_EMPLEADO"/>
+        </property>
+        <property name="claveSecreta" >
+            <column name="CLAVE_SECRETA"/>
+        </property>
+        <property name="activo" >
+            <column name="ACTIVO"/>
+        </property>
+        
+        <property name="imagenPath" >
+            <column name="IMAGEN_PATH"/>
+        </property>
+        <property name="fechaNac" >
+            <column name="FECHA_NAC"/>
+        </property>
+
+        <property name="genero" >
+            <column name="GENERO"/>
+        </property>
+
+        <property name="salario" >
+            <column name="SALARIO"/>
+        </property>
+                        
+<!--         <set  fetch="join" inverse="false" lazy="true" name="llamadases" sort="unsorted" table="LLAMADAS"> -->
+<!--             <key on-delete="noaction"> -->
+<!--                 <column name="EMPLEADO_ID"/> -->
+<!--             </key> -->
+<!--             <one-to-many class="com.music.admin.proy.vo.Llamadas" not-found="exception"/> -->
+<!--         </set> -->
+   		
+    </class>
+</hibernate-mapping>
