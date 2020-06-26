@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-cascade="none" default-lazy="true">
+    <class catalog="musicapp"  mutable="true" name="com.music.admin.proy.vo.CatCategoriaCliente" polymorphism="implicit" table="CAT_CATEGORIACLIENTES">
+        
+        <id name="catClienteId" type="java.lang.Integer">
+            <column name="CAT_CLIENTES_ID"/>
+            <generator class="identity"/>
+        </id>
+        <property name="descripcion" type="string">
+            <column length="30" name="DESCRIPCION" not-null="true"/>
+        </property>
+        <property name="activo" type="java.lang.Integer">
+            <column name="ACTIVO"/>
+        </property>
+        <property name="usuarioAlta" type="string">
+            <column name="USUARIO_ALTA"/>
+        </property>
+        <property name="classLabel" type="string">
+            <column name="CLASS_LABEL"/>
+        </property>
+<!--         <set fetch="select" inverse="true" lazy="true" mutable="true" name="eventoses" sort="unsorted" table="EVENTOS"> -->
+<!--             <key on-delete="noaction"> -->
+<!--                 <column name="TIPO_EVENTO_ID"/> -->
+<!--             </key> -->
+<!--             <one-to-many class="com.music.admin.proy.vo.Eventos" embed-xml="true" not-found="exception"/> -->
+<!--         </set> -->
+        
+    </class>
+</hibernate-mapping>

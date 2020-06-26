@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-cascade="none" default-lazy="true">
+    <class catalog="musicapp"  mutable="true" name="com.music.admin.proy.vo.Inventario" polymorphism="implicit" table="INVENTARIO">
+        
+        <id name="articuloId" type="java.lang.Integer">
+            <column name="ARTICULO_ID"/>
+            <generator class="identity"/>
+        </id>
+        <property name="nombre" type="string">
+            <column length="200" name="NOMBRE" />
+        </property>
+        <property name="descripcion" type="string">
+            <column length="200" name="DESCRIPCION"/>
+        </property>
+        <property name="valor" type="java.lang.Integer">
+            <column name="VALOR"/>
+        </property>
+        <property name="numeroSerie" type="string">
+            <column name="NUMERO_SERIE"/>
+        </property>
+         <property name="codigoBarras" type="string">
+            <column name="CODIGO_BARRAS"/>
+        </property>
+         <property name="observaciones" type="string">
+            <column name="OBSERVACIONES"/>
+        </property>
+         <property name="categoria" type="string">
+            <column name="CATEGORIA"/>
+        </property>
+         <property name="usuarioAlta" type="string">
+            <column name="USUARIO_ALTA"/>
+        </property>
+         <property name="fotoArticulo" type="string">
+            <column name="FOTO_ARTICULO"/>
+        </property>
+<!--         <set fetch="select" inverse="true" lazy="true" mutable="true" name="eventoses" sort="unsorted" table="EVENTOS"> -->
+<!--             <key on-delete="noaction"> -->
+<!--                 <column name="TIPO_EVENTO_ID"/> -->
+<!--             </key> -->
+<!--             <one-to-many class="com.music.admin.proy.vo.Eventos" embed-xml="true" not-found="exception"/> -->
+<!--         </set> -->
+        
+    </class>
+</hibernate-mapping>
