@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import com.music.admin.proy.daos.ClientesDao;
 import com.music.admin.proy.daos.EmpleadosDao;
+import com.music.admin.proy.vo.ClienteDto;
 import com.music.admin.proy.vo.Clientes;
 import com.music.admin.proy.vo.Empleados;
 import com.music.admin.proy.vo.Llamadas;
@@ -69,8 +70,18 @@ public class ClientesServiceImp implements ClientesService {
 	}
 	
 	@Override
-	public int save(Clientes cliente) {
-		return clientesDao.save(cliente);
+	public int save(Clientes  clientes) {
+		Clientes cte = new Clientes();
+		/*
+		cte.setNombre(cteDto.getNombre());
+		cte.setApellidos(cteDto.getApellidos());
+		cte.setTelefono(cteDto.getTelefono());
+		cte.setCorreo(cteDto.getCorreo());
+		*/
+		clientesDao.save(clientes);
+		
+	
+		return 0;
 	}
 
 	@Override
@@ -93,4 +104,14 @@ public class ClientesServiceImp implements ClientesService {
 	public int eliminaLlamada(Llamadas llamada) {
 		return clientesDao.eliminaLlamada(llamada);
 	}
+
+	@Override
+	public List<String> getEmailCliente() {
+		// TODO Auto-generated method stub
+		return clientesDao.getEmailCliente();
+	}
+
+
+	
+	
 }

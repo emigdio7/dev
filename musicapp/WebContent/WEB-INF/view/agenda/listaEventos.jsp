@@ -107,7 +107,7 @@
                 	<div class="col-12">
                 		<div class="card">
                 			<div class="card-body">
-                             <h4 class="card-title">Eventos</h4>
+                             <h4 class="card-title">Eventossssss</h4>
                              <h6 class="card-subtitle">Lista de Eventos</h6>
                              
                              <div class="form-body">
@@ -173,7 +173,7 @@
 					                            <div class="card-body">
 					                                <h4 class="card-title">Información del Evento</h4>
 					                                <h6 class="card-subtitle">Teclee los datos del
-					                                    <code>Evento</code> a dar de Alta.</h6>
+					                                    <code>Evento</code> a dar de Altaaaa.</h6>
 					                                <div class="row">
 					                                
 					                                	<div class="col-md-6">
@@ -256,7 +256,18 @@
 					                                    <div class="col-md-4">
 					                                        <label class="m-t-20">Tipo del Evento</label>
 					                                        <div class="input-group">
-				                                                <input type="text" class="form-control" id="tipoEventoE" value="">
+				                                              
+				                                                 <select data-rule-selecs="true"
+																			class="form-control" id="tipoEventoE" required
+																			name="tipoEventoE" placeholder="seleccione una opcion">
+																			<option value="-1">* Seleccione una Opcion</option>
+																			<c:forEach var="evento" begin="0" items="${lstEvnetos}">
+																			<c:if test="${evento.activo == '1'}">
+																			       <option value="${evento.tipoEventoId}">${evento.descripcion}</option>
+																		    </c:if>
+																			</c:forEach>
+																
+																</select>        
 				                                            </div>
 					                                    </div>
 					                                    <div class="col-md-4">
@@ -658,7 +669,7 @@
 	 
 	//Evento para guardar o actulizar el registro
 	 $("#agregarEvento").click(function() {
-		 	
+		 	console.log("guardaEventoModulo");
 			console.log('en boton Agregar Evento');
 	    	$.ajax({
 	    		url: "guardaEventoModulo",

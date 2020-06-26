@@ -104,7 +104,7 @@
                                      <thead style="color: aliceblue;">
                                          <tr>
                                          	 <th>Id</th>
-                                             <th>Nombre</th>
+                                             <th>Nombresssss</th>
                                              <th>Apellido Paterno</th>
                                              <th>Apellido Materno</th>
                                              <th>Telefono</th>
@@ -124,7 +124,7 @@
 										    	<td>${empleado.telefono}</td>
 										    	<td>${empleado.correo}</td>
 <%-- 										    	<td>${empleado.rol.rolId}</td> --%>
-												<td><span class="label ${empleado.rol.classLabel}">${empleado.rol.descripcion}</span></td>
+												<td><span >${empleado.rol.descripcion}</span></td>
 										    	<td>${empleado.salario}</td>
 												<c:if test="${empleado.activo == '1' }">
 										    		<td><span class="label label-success">ACTIVO</span> </td>

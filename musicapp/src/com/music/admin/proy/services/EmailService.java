@@ -13,6 +13,8 @@
  */
 package com.music.admin.proy.services;
 
+import java.util.List;
+
 /**
  * Descripcion:
  * @author Victor Manuel Gonzalez Santamaria (victor.gonzalezsan@gmail.com)
@@ -21,6 +23,6 @@ package com.music.admin.proy.services;
  */
 public interface EmailService {
 	 
-	public void sendSimpleMessage(String to, String subject, String text);
+	public void sendSimpleMessage(String subject, String text);
 	 
 }

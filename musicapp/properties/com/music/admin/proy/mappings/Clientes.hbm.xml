@@ -30,6 +30,12 @@
         <property name="usuarioAlta" type="string" >
             <column name="USUARIO_ALTA"/>
         </property>	
+        <property name="categoria" type="string" >
+            <column name="CATEGORIA"/>
+        </property>	
+        <property name="activo" type="java.lang.Integer" >
+            <column name="ACTIVO"/>
+        </property>	
         
         <set fetch="select" inverse="false"  lazy="true" name="eventoses" sort="unsorted" order-by="eventoId desc" table="EVENTOS">
             <key on-delete="noaction">

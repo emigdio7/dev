@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping  default-cascade="none" default-lazy="true">
+<hibernate-mapping  default-cascade="none" default-lazy="false">
     <class  catalog="musicapp" name="com.music.admin.proy.vo.Llamadas" table="LLAMADAS">
         <id name="llamadaId" >
             <column name="LLAMADA_ID"/>
@@ -15,7 +15,7 @@
 	    <many-to-one fetch="select" class="com.music.admin.proy.vo.Empleados" name="empleado" not-found="exception" update="false">
             <column name="EMPLEADO_ID"/>
         </many-to-one>
-        <many-to-one fetch="select" class="com.music.admin.proy.vo.Clientes"  name="cliente" not-found="exception" update="false">
+        <many-to-one fetch="select"  class="com.music.admin.proy.vo.Clientes"  name="cliente" not-found="exception" update="false">
             <column name="CLIENTE_ID"/>
         </many-to-one>
         <property  name="fecha" >

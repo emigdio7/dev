@@ -31,7 +31,7 @@ public class Rol implements java.io.Serializable {
 	private Integer rolId;
 	private String descripcion;
 	private Integer activo;
-	private String claveEmpleado;
+//	private String claveEmpleado;
 	//private String classLabel;
 
 	public Rol() {
@@ -105,16 +105,6 @@ public class Rol implements java.io.Serializable {
 	/**
 	 * @return the claveEmpleado
 	 */
-	public String getClaveEmpleado() {
-		return claveEmpleado;
-	}
-
-	/**
-	 * @param claveEmpleado the claveEmpleado to set
-	 */
-	public void setClaveEmpleado(String claveEmpleado) {
-		this.claveEmpleado = claveEmpleado;
-	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -148,20 +138,21 @@ public class Rol implements java.io.Serializable {
 	}
 
 
+	@Override
+	public String toString() {
+		return "Rol [rolId=" + rolId + ", descripcion=" + descripcion + ", activo=" + activo + "]";
+	}
+
+
 
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
-	/*
-	@Override
-	public String toString() {
-		return "Rol [rolId=" + rolId + ", descripcion=" + descripcion + ", activo=" + activo + ", claveEmpleado="
-				+ claveEmpleado + ", classLabel="  + "]";   
-	}
+	
+	
 
-
-	*/
+	
 
 
 

@@ -2,6 +2,60 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon.png">
+    <title>Vela Music</title>
+    
+    <!-- Bootstrap Core CSS -->
+    <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Calendar CSS -->
+    <link href="../assets/plugins/calendar/dist/fullcalendar.css" rel="stylesheet" />
+    
+    <!-- Footable CSS -->
+    <link href="../assets/plugins/footable/css/footable.bootstrap.min.css" rel="stylesheet">
+	<link href="../assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../assets/plugins/datatables/media/css/dataTables.bootstrap4.css">
+    <link rel="stylesheet" type="text/css" href="../assets/plugins/datatables/media/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/sweetalert2.min.css">
+	
+    <!-- Page plugins css -->
+    <link href="../assets/plugins/clockpicker/dist/bootstrap-clockpicker.min.css" rel="stylesheet">
+    
+    <!-- Date picker plugins css -->
+    <link href="../assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    
+    <!-- Custom CSS -->
+<!--     <link href="../css/helper.css" rel="stylesheet"> -->
+    <link href="../css/style.css" rel="stylesheet">
+<!--     <link href="../css/icons/flag-icon-css/flag-icon.min.css" rel="stylesheet"> -->
+    
+    <!-- You can change the theme colors from here -->
+    <link href="../css/blue.css" id="theme" rel="stylesheet">
+
+ <!-- CSS Section -->
+<style>
+            			
+            			 .error {
+            			     color: red;
+            			 }	
+            			 
+            			 </style>
+
+</head>
+
+
+
 <jsp:include page="../head.jsp" /> 
 
 <body class="fix-header fix-sidebar card-no-border" style="">
@@ -51,10 +105,10 @@
                             <div class="card-header">
                                 <h4 class="m-b-0 text-white">Edicion y Consulta de Catalogos de Eventos</h4>
                             </div>
-                            <div class="card-body">
-                                <form:form method="post" action="/musicapp/catalogos/guardaEvento" id="formEventos" class="form-horizontal">
-                             	 <input type="hidden" name="eventoId">
-                             	 <input type="hidden" name="action">
+                            <div class="card-body"><!-- action="/guardaEvento" -->
+                                <form id="agregar" class="form-horizontal">
+                             	 <input type="hidden" id="tipoEventoId" name="tipoEventoId">
+                             	 <input type="hidden" id="action" name="action">
                                 
                                     <div class="form-body">
 <!--                                         <h3 class="box-title">Person Info</h3> -->
@@ -66,7 +120,7 @@
                                                     <div class="col-md-9">
 <!--                                                         <input type="text" class="form-control" placeholder="John doe"> -->
                                                         <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion del Evento" 
-				    			onkeypress="return validar(event)" >
+				    			onkeypress="return validar(event)" required>
                                                         <small class="form-control-feedback"> Nombre del Evento </small> </div>
                                                 </div>
                                             </div>
@@ -74,7 +128,7 @@
                                                 <div class="form-group row">
                                                     <label class="control-label text-right col-md-3">Estatus</label>
                                                     <div class="col-md-9">
-                                                        <select class="form-control" id="activo" name="activo">
+                                                        <select class="form-control"  id="activo"  name="activo" data-rule-selecs="true" required>
 															<option value="-1">Seleccione</option> 		
 															<option value="1">Activo</option>
 															<option value="0">Inactivo</option>
@@ -86,7 +140,7 @@
                                                 <div class="form-group row">
                                                     <label class="control-label text-right col-md-3">Etiqueta</label>
                                                     <div class="col-md-9">
-                                                        <select class="form-control" id="classLabel" name="classLabel">
+                                                        <select class="form-control" data-rule-selecs="true" id="classLabel" name="classLabel" required placeholder="seleccione una opcion">
 															<option value="-1">Seleccione</option> 		
 															<option value="label-danger">label-danger</option>
 															<option value="label-info">label-info</option>
@@ -108,7 +162,7 @@
                                             <div class="col-md-12">
                                                 <div class="row">
                                                     <div class="col-md-offset-1 col-md-12">
-                                                        <button type="button" onclick="guarda()" class="btn btn-success">Guardar</button>
+                                                        <button type="button" id="agregarNuevo"  class="btn btn-success">Guardar</button>
                                                         <button type="button" class="btn btn-inverse">Cancelar</button>
                                                     </div>
                                                 </div>
@@ -117,7 +171,7 @@
                                         </div>
                                     </div>
                                     
-                                </form:form>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -142,7 +196,7 @@
                                          </tr>
                                      </thead>
                                      <tbody>
-						  	              <c:forEach items="${lstEventos}" var="eventos">	
+						  	              <c:forEach var="eventos"  begin="0"  items="${lstEventos}">	
 											<tr>
 												<td>${eventos.tipoEventoId}</td>
 												<td><span class="label ${eventos.classLabel}">${eventos.descripcion}</span></td>
@@ -154,9 +208,9 @@
 										    		<td><span class="label label-danger">INACTIVO</span> </td>
 												</c:if>
 												
-												<td style="white-space:nowrap;" align="right">
+												<td style="white-space:nowrap;" align="left">
 						                            
-						                            <button type="button" onclick="edita(${eventos.tipoEventoId},'${eventos.descripcion}',${eventos.activo})" title="Editar Evento" class="btn btn-outline-info btn-sm" >
+						                            <button type="button" onclick="edita(${eventos.tipoEventoId},'${eventos.descripcion}',${eventos.activo},'${eventos.classLabel}')" title="Editar Evento" class="btn btn-outline-info btn-sm" >
 						                            	<i class="fa fa-edit"></i>
 						                            </button>
 						                            <button type="button" onclick="elimina(${eventos.tipoEventoId})" title="Eliminar Evento" class="btn btn-outline-info btn-sm">
@@ -204,6 +258,7 @@
     <!-- All Jquery -->
     <!-- ============================================================== -->
  	<script src="../assets/plugins/jquery/jquery.min.js"></script>
+ 	<script src="../assets/plugins/jquery/jquery.validate.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="../assets/plugins/popper/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
@@ -234,12 +289,16 @@
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
     
-    
+      
+      
+      
     
   <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+   
+    <script src="../assets/plugins/sweetalert/sweetalert.min.js"></script>
     
           	<!-- end - This is for export functionality only -->
 	<script>
@@ -268,6 +327,75 @@
 	</script>
 	
 	<script type="text/javascript">
+	
+	//Evento para guardar o actulizar el registro
+	 $("#agregarNuevo").click(function() {
+		  event.preventDefault();
+		  
+		  jQuery.validator.messages.required = '* Este campo es obligatorio.';
+		  
+		  $.validator.addMethod("selecs", function(value, element) {
+			    var valor = element;
+			    console.log(valor);
+			    console.log(value);
+			    return value != -1;
+			}, "* Seleccione una opcion.");
+		
+	        if( $("#agregar").valid()){
+		  
+		  
+	    	$.ajax({
+	    		url: "guardaEventos",
+	    		type: "post",
+	    		data: {
+	    			tipoEventoId:$('#tipoEventoId').val(),
+	    	        action:$("#action").val(),
+	    	        descripcion:$('#descripcion').val(),
+	    	        activo:$('#activo').val(),
+	    	        classLabel:$('#classLabel').val()
+	    		},	
+	    		success : function(data){
+	    			console.log("data--->"+data);
+
+	    			
+	    			 if ("ok" == data) {
+		    			console.log("evento agregado con exito");
+		    	
+
+	    				 Swal.fire({
+	    					 position: 'center',
+  	    					  type: 'success',
+  	    					 title: "Operacion realizada con exito se Agrego/Actualizo un evento!",
+  	    					  showCancelButton: false,
+  	    					  confirmButtonColor: '#3085d6',
+  	    					  confirmButtonText: 'OK!'
+  	    					}).then((result) => {
+  	    					  if (result.value) {
+  	    						  location.reload(); 
+  	    					  }
+  	    					})
+	    			  
+		    		
+
+	    			 }else{
+	    				 console.log("ha ocurrido un erro al agregar el evento");
+	    			 }
+	    			 
+	    		} 
+	    	});
+	    	
+	        }//fin del iF de Validacion
+	        else{
+	        	 Swal.fire({ position: 'center', type: 'error', title: 'Complete todos los campos',showConfirmButton: false,timer: 1500});
+	        }
+	    	
+	    	
+	    	
+	    	
+	    });
+	
+	
+	
 
 function validar(e) {
 	var tecla = (document.all) ? e.keyCode : e.which;
@@ -278,29 +406,95 @@ function validar(e) {
 }
 
 
-function edita(eventoId, descripcion, activo) {
+function edita(eventoId, descripcion, activo, classLabel) {
 
 	//Get
 	//var bla = $('#txt_name').val();
 	//Set
-	$('#eventoId').val(eventoId);
+	$('#tipoEventoId').val(eventoId);
 	$('#action').val('insert');
 	$('#descripcion').val(descripcion);
-	//$('#activo').val(activo);
-
-	//$('#activo').val('Activo').prop('selected', true);
+	$('[name=classLabel]').val( classLabel );
 	$('[name=activo]').val( activo );
+	$('#descripcion').focus();
 	//$( "#myselect option:selected" ).text();
 	
 	
 }
 
 function elimina(eventoId) {
-
-	$('#eventoId').val(eventoId);
-	$('#action').val('delete');
 	
-	$("#formEventos").submit();
+	 Swal.fire({
+		  title: 'Estas seguro eliminar el evento del catalogo?',
+		  text: "El evento ya no existira en la lista!",
+		  type: 'warning',
+		//  icon: 'warning',
+		  showCancelButton: true,
+		  /*confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',*/
+		  confirmButtonText: 'Si, Eliminar el evento!',
+		  cancelButtonText: 'No, cancelar!'
+		}).then((result) => {
+		  if (result.value) {
+			  console.log(result.value);
+			  
+			 	$.ajax({
+					url: "eliminarEvento",
+					type: "post",
+					data: {
+						idEvento:eventoId
+					},	
+					success : function(data){
+						console.log("data--->"+data);
+
+						
+						 if ("ok" == data) {
+			    			console.log("evento eliminado con exito");
+			    			 // Swal.fire({ position: 'center', type: 'success', title: 'La información ha sido Actualizada',showConfirmButton: false,timer: 1500});
+			    			 
+			    			  
+			    				 Swal.fire({
+			    					 position: 'center',
+	       	    					  type: 'success',
+	       	    					 title: "se eliminado el evento de la lista!",
+	       	    					  showCancelButton: false,
+	       	    					  confirmButtonColor: '#3085d6',
+	       	    					  confirmButtonText: 'OK!'
+	       	    					}).then((result) => {
+	       	    					  if (result.value) {
+	       	    						  location.reload(); 
+	       	    					  }
+	       	    					})
+			    			  
+			    			  
+			    			  
+			    			  
+			    		
+
+						 }else{
+							 console.log("ha ocurrido un erro al eliminar el evento");
+							 Swal.fire({ position: 'center', type: 'error', title: 'ha ocrrudo un error al eliminar el evento',showConfirmButton: false,timer: 1500});
+						 }
+						 
+					} 
+				});// fin ajax
+			  
+			  
+			
+			    
+	 	
+		  }else{
+			  
+			 console.log("no se eliminara");
+			  
+		  }
+		});
+
+
+	
+
+	
+	
 	
 }
 

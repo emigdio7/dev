@@ -48,4 +48,6 @@ public interface ClientesDao {
 	
 	Clientes findOnlyCliente(Integer clienteId);
 	
+	List<String> getEmailCliente();
+	
 }

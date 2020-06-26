@@ -326,8 +326,20 @@ ul {
 					                                    </div>
 					                                    <div class="col-md-4">
 					                                        <label class="m-t-20">Tipo del Evento</label>
-					                                        <div class="input-group">
-				                                                <input type="text" class="form-control" id="tipoEventoE" value="">
+					                                        <div><!--  class="input-group" -->
+				                                               
+				                                                 <select data-rule-selecs="true"
+																			class="form-control" id="tipoEventoE" required
+																			name="tipoEventoE" placeholder="seleccione una opcion">
+																			<option value="-1">* Seleccione una Opcion</option>
+																			<c:forEach var="evento" begin="0" items="${lstEvnetos}">
+																			<c:if test="${evento.activo == '1'}">
+																			       <option value="${evento.tipoEventoId}">${evento.descripcion}</option>
+																		    </c:if>
+																			</c:forEach>
+																
+																		</select>        
+				                                                
 				                                            </div>
 					                                    </div>
 					                                    <div class="col-md-4">
@@ -358,7 +370,7 @@ ul {
                         <div class="card"> <img class="card-img" src="../assets/images/background/logoVela.jpeg" alt="Card image">
                             <div class="card-img-overlay card-inverse social-profile d-flex ">
                                 <div class="align-self-center"> <img src="../assets/images/users/vela.jpeg" class="img-circle" width="100">
-                                    <h4 class="card-title">Jesus Vela Guman</h4>
+                                    <h4 class="card-title">test test</h4>
                                     <h6 class="card-subtitle">americanmusic@hotmail.com</h6>
                                     <p class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Administrador Principal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                                 </div>

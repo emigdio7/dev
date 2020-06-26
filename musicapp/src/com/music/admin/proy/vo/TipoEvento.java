@@ -33,8 +33,9 @@ public class TipoEvento implements java.io.Serializable {
 	private String descripcion;
 	private Integer activo;
 	private String usuarioAlta;
-	private Set<Eventos> eventoses = new HashSet<Eventos>(0);
 	private String classLabel;
+	private Set<Eventos> eventoses = new HashSet<Eventos>(0);
+	
 	
 	public TipoEvento() {
 	}
@@ -136,14 +137,16 @@ public class TipoEvento implements java.io.Serializable {
 		this.eventoses = eventoses;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "TipoEvento [tipoEventoId=" + tipoEventoId + ", descripcion=" + descripcion + ", activo=" + activo
-				+ ", usuarioAlta=" + usuarioAlta + ", eventoses=" + eventoses + "]";
+				+ ", usuarioAlta=" + usuarioAlta + ", classLabel=" + classLabel + ", eventoses=" + eventoses + "]";
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+
 
 
 }

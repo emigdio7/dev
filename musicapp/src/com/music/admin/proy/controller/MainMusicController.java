@@ -71,8 +71,8 @@ public class MainMusicController {
 	@RequestMapping(value = "/home", method = RequestMethod.POST)
 	public String home(Model modelo, @RequestParam String nombreUsuario, 
 			@RequestParam String pass, HttpServletRequest request) {
-		System.out.println("en home");
-		logger.info("Mensaje de home: "+nombreUsuario);
+		System.out.println("en home111");
+		System.out.println("Mensaje de home: "+nombreUsuario);
 		UserDetails usr = null;
 		try {
 			usr =  userDetailsService.loadUserByUsername(nombreUsuario);

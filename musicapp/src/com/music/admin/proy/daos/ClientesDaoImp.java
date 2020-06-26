@@ -154,5 +154,17 @@ public class ClientesDaoImp  extends GenericHibernateDAOImpl implements Clientes
 		delete(llamada);
 		return 1;
 	}
+
+	
+    @SuppressWarnings("unchecked")
+	@Transactional(readOnly = true)
+	@Override
+	public List<String> getEmailCliente() {
+	String hql = "select correo from Clientes where activo = 1";
+	
+	return getCurrentSession().createQuery(hql)
+		   .list();
+	
+	}
 	
 }

@@ -341,7 +341,7 @@
 										    	<td>${empleado.apellidoMat}</td>
 										    	<td>${empleado.telefono}</td>
 										    	<td>${empleado.correo}</td>
-										    	<td><span class="label ${empleado.rol.classLabel}">${empleado.rol.descripcion}</span></td>
+										    	<td><span>${empleado.rol.descripcion}</span></td><!--  class="label ${empleado.rol.classLabel}" -->
 
 												<c:if test="${empleado.activo == '1' }">
 										    		<td><span class="label label-success">ACTIVO</span> </td>

@@ -63,7 +63,7 @@
  
  	<import resource="classpath:enviromentContext.xml"/>
  
-<!--  	<import resource="classpath:spring-quartz.xml"/> -->
+	<!-- <import resource="classpath:spring-quartz.xml"/>  -->
  
  <!--     <context:property-placeholder location="classpath:application.properties"/> -->
  

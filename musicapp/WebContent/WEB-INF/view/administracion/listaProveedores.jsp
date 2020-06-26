@@ -7,8 +7,12 @@
 <body class="fix-header fix-sidebar card-no-border" style="">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
+    
+  
+    
 <!--  <link rel="stylesheet" type="text/css" href="../css/sweetalert2.min.css">	-->
- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> 		
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> 
+   	
     <!-- ============================================================== -->
     <div class="preloader" style="display: none;">
         <svg class="circular" viewBox="25 25 50 50">
@@ -58,26 +62,13 @@
                              </div>
                              <div class="col-md-3">
                             
-                               <a id="target" href="#">Add Provider</a>
+                                                          <!--  -->
+                                <button type="button" class="btn btn-info btn-rounded m-t-10 float-right" id="target" data-toggle="modal"  data-target="#add-contact" >Agregar Nuevo Proveedor</button>
                             
                              </div>
 				
 				            </div>
-                			<!-- 
-                			<div class="container" style="color: blue;">
-                			
-                			 <div class="col-md-9" style="color: red;">
-                			 <h4 class="card-title">Data Table</h4>
-                             <h6 class="card-subtitle">Data table example</h6>
-                			 </div>
-                			
-                			 <div class="col-md-3" style="color: lime;">
-                			  <a href="#">ad co</a>
-                			 </div>
-                			     
-                			
-                			</div>   
-                			 -->
+                		
                           
                              <div class="table-responsive m-t-40">
                                  <table id="myTable" class="table table-bordered table-striped">
@@ -89,13 +80,7 @@
                                               <th>City</th>
                                              <th>Email</th>
                                              <th>Category</th>
-                                            
-                                              <th>
-                                             
-                                              </th>
-                                               <th>
-                                             
-                                              </th>
+                                               <th>Accion</th>
                                          </tr>
                                      </thead>
                                      <tbody>
@@ -108,12 +93,19 @@
                                              <td>${proveedores.direccion.calle}. ${proveedores.direccion.colonia} </td>
                                              <td>${proveedores.direccion.ciudad}</td>
                                              <td>${proveedores.correo} </td>
+                                             
                                              <td><span class="label label-inverse">${proveedores.categoria}</span> </td>
-                                             <td>
-                                              <button id="editar" onclick="editar(${proveedores.provedorId})" class="btn btn-primary"><i class="fas fa-edit"></i>  Edit</button></td>
-                                              <td>
-                                          <button id="eliminar" onclick='eliminar(${proveedores.provedorId})' class="btn btn-primary bn"><i class="fas fa-trash-alt"></i>  Eliminar</button>   
-                                              </td>
+                                         
+                                              <td style="white-space:nowrap;" align="left">
+						                            
+						                            <button type="button" id="editar" onclick="editar(${proveedores.provedorId},'${ proveedores.categoria}')" title="Editar Proveedor" class="btn btn-outline-info btn-sm" >
+						                            	<i class="fa fa-edit"></i>
+						                            </button>
+						                            <button type="button" id="eliminar" onclick='eliminar(${proveedores.provedorId})' title="Eliminar Proveedor" class="btn btn-outline-info btn-sm">
+						                            	<i class="fa fa-trash"></i>
+						                            </button>
+						                                                        
+						                       </td>
                                          </tr>
                                           </c:forEach>
                                          
@@ -151,7 +143,7 @@
                                             <div class="modal-header">
                                                  
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ><i class="mdi mdi-account-check"></i></button>
-                                            <h4 class="modal-title" id="myModalLabel"> Agregar Proveedor</h4> </div>
+                                            <h4 class="modal-title" id="myModalLabel"> Datos del Proveedor</h4> </div>
                                             <div class="modal-body">
                                                 <from class="form-horizontal form-material">
                                        				<div class="container col-md-12">
@@ -164,10 +156,10 @@
 										                            <div class="card-body">
 <%-- 										                                <form action="/empleados/listaEmpleados" name="formClientes" id="formClientes" class="form-horizontal"> --%>
 										                                <form   id="agregar" class="form-horizontal" >
-										                                	<!--  <input type="hidden" id="clienteId" >
-										                                	<input type="hidden" id="direccionId" >
-										                                	<input type="hidden" id="cadena" name="cadena">
-										                                	<input type="hidden" id="actualiza" > -->
+										                                	<  <input type="hidden" name="provedorId" id="provedorId" >
+										                                	<input type="hidden" name="direccionId" id="direccionId" >
+										                                	<!-- <input type="hidden" id="cadena" name="cadena">
+										                                	<input type="hidden" id="actualiza" >  -->
 										                                	
 										                                    <div class="form-body">
 										                                        <h3 class="box-title">Informaci&oacute;n Personal</h3>
@@ -285,31 +277,38 @@
 										                                            <!--/span-->
 										                                                                                     <!--/span-->
 										                                        </div>
-										                                        
-										                                         <div class="row">
-										                                            <div class="col-md-6">
-															<div class="form-group">
-										<label for="exampleInputPassword1">Categoria</label> <input required
-										 name="categoria"	type="text" class="form-control"
-											id="categoria" placeholder="audio,soporte,moviliario etc.">
-									</div></div></div>
-										                                        
-                                                                   <div class="row">
-										                                            <div class="col-md-6">
-															<div class="form-group">
-																<label for="exampleFormControlTextarea1">Observaciones</label>
-																<textarea class="form-control" name="observaciones"
-																	id="observaciones" rows="3"></textarea>
+
+															<div class="row">
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label for="exampleInputPassword1">Categoria</label>
+																		 <select data-rule-selecs="true"
+																			class="form-control" id="categoria" required
+																			name="categoria" placeholder="seleccione una opcion">
+																			<option value="-1">* Seleccione una Opcion</option>
+																			<c:forEach var="categoria" begin="0" items="${categorias}">
+																			<c:if test="${categoria.activo == '1' }">
+																			          <option>${categoria.descripcion}</option>
+																		    </c:if>
+																			</c:forEach>
+																
+																		</select>
+
+																	</div>
+																</div>
 															</div>
-															</div></div>
-															
-															
+
+															<div class="row">
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label for="exampleFormControlTextarea1">Observaciones</label>
+																		<textarea class="form-control" name="observaciones"
+																			id="observaciones" rows="3"></textarea>
+																	</div>
+																</div>
+															</div>
 
 
-
-
-
-															<!--/row-->
 										                                    </div>
 										                                    <hr>
 										                                </form>
@@ -323,7 +322,7 @@
                                                 </from>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-success waves-effect" id="agregarNuevo" >Guardar</button>
+                                                <button type="button" class="btn btn-success waves-effect" id="agregarNuevo"></button>
                                                 <button type="button" class="btn btn-inverse waves-effect" data-dismiss="modal">Cancelar</button>
                                             </div>
                                         </div>
@@ -333,204 +332,7 @@
                                 </div>
 
 				<!-- ==========FIN modal de registro=================  -->
-				 <!-- ==========modal de editar=================  -->
-
-                   
-                                                  <!-- Add Contact Popup Model -->        
-                                <div id="myModalEdit"  class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-                                    <div class="modal-dialog modal-xl">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                 
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ><i class="mdi mdi-account-check"></i></button>
-                                            <h4 class="modal-title" id="myModalLabel"> editar Proveedor</h4> </div>
-                                            <div class="modal-body">
-                                                <from class="form-horizontal form-material">
-                                       				<div class="container col-md-12">
-														<div class="row">
-										                    <div class="col-lg-12">
-										                        <div class="card card-outline-info">
-										                            <div class="card-header">
-										                                <h4 class="m-b-0 text-white"></h4>
-										                            </div>
-										                            <div class="card-body">
-<%-- 										                                <form action="/empleados/listaEmpleados" name="formClientes" id="formClientes" class="form-horizontal"> --%>
-										                                <form  id="editarRegistro" class="form-horizontal" >
-										                                	<!--  <input type="hidden" id="clienteId" >
-										                                	<input type="hidden" id="direccionId" >
-										                                	<input type="hidden" id="cadena" name="cadena">
-										                                	<input type="hidden" id="actualiza" > -->
-										                                	
-										                                	<input type="hidden" id="provedorId"  name="provedorId" class="provedorId" >
-										                                	<input type="hidden" id="direccionId" name="direccionId" class="direccionId" >
-										                                	
-										                                    <div class="form-body">
-										                                        <h3 class="box-title">Informaci&oacute;n Personal</h3>
-										                                        <hr class="m-t-0 m-b-40">
-										                                        
-										                                        <div class="row">
-										                                            <div class="col-md-12">
-										                                                <div class="form-group row">
-										                                                    <label class="control-label text-center col-md-2">Nombre(s)</label>
-										                                                    <div class="col-md-10">
-										                                                        <input type="text"  class="form-control nombre" id="nombre" name="nombre"  required >
-										                                                        <small class="form-control-feedback">Nombre del Cliente o Razon Social </small> </div>
-										                                                </div>
-										                                            </div>
-										                                            <!--/span-->
-										                                            <!--/span-->
-										                                        </div>
-										                                           <!-- aqui van los otros input -->
-										                                           
-
- <div class="row">
-										                                            <div class="col-md-6">
-										                                                <div class="form-group row">
-										                                                    <label class="control-label text-right col-md-3">Correo</label>
-										                                                    <div class="col-md-9">
-										                                                        <input type="email"  pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" class="form-control correo" id="correo" name="correo"  placeholder=""  required >
-										                                                        <small class="form-control-feedback">Correo Valido </small> </div>
-										                                                </div>
-										                                            </div>
-										                                            
-										                                             
-										                                            
-										                                            <div class="col-md-6">
-										                                                <div class="form-group row">
-										                                                    <label class="control-label text-right col-md-3">Telefono</label>
-										                                                    <div class="col-md-9">
-										                                                        <input type="number" class="form-control telefono" id="telefono"  name="telefono"  placeholder="(777) 7777777"  required >
-										                                                        <small class="form-control-feedback"> Telefono de contacto </small> </div>
-										                                                </div>
-										                                            </div>
-										                                        </div>
-										                                        										                                        
-										                                        
-										                                        <h3 class="box-title">Direcci&oacute;n</h3>
-										                                        <hr class="m-t-0 m-b-40">
-										                                        <!--/row-->
-										                                        <div class="row">
-										                                            <div class="col-md-6">
-										                                                <div class="form-group row">
-										                                                    <label class="control-label text-right col-md-3">Calle</label>
-										                                                    <div class="col-md-9">
-										                                                        <input type="text" id="calle" name="calle" class="form-control calle"  required >
-										                                                    </div>
-										                                                </div>
-										                                            </div>
-										                                            <div class="col-md-6">
-										                                                <div class="form-group row">
-										                                                    <label class="control-label text-right col-md-3">Colonia</label>
-										                                                    <div class="col-md-9">
-										                                                        <input type="text" id="colonia" name="colonia" class="form-control colonia"   required>
-										                                                    </div>
-										                                                </div>
-										                                            </div>
-										                                        </div>
-										                                        <div class="row">
-										                                            <div class="col-md-6">
-										                                                <div class="form-group row">
-										                                                    <label class="control-label text-right col-md-3">Ciudad</label>
-										                                                    <div class="col-md-9">
-										                                                        <input type="text" id="ciudad" name="ciudad" class="form-control ciudad"  required >
-										                                                    </div>
-										                                                </div>
-										                                            </div>
-										                                            <!--/span-->
-										                                            <div class="col-md-6">
-										                                                <div class="form-group row">
-										                                                    <label class="control-label text-right col-md-3">Estado</label>
-										                                                    <div class="col-md-9">
-										                                                        <input type="text" id="estado"  name="estado" class="form-control estado"  required >
-										                                                    </div>
-										                                                </div>
-										                                            </div>
-										                                            <!--/span-->
-										                                        </div>
-										                                        <!--/row-->
-															<div class="row">
-																<div class="col-md-6">
-																	<div class="form-group row">
-																		<label class="control-label text-right col-md-3">C.
-																			P.</label>
-																		<div class="col-md-9">
-																			<input type="number" id="cp" name="cp"
-																				class="form-control cp" minlength="4" maxlength="9"
-																				required>
-																		</div>
-																	</div>
-																</div>
-																<!--/span-->
-																<!--/span-->
-															</div>
-
-															<div class="row">
-																<div class="col-md-6">
-																	<div class="form-group">
-																		<label for="exampleInputPassword1">Categoria</label>
-											
-																			 <select
-																			class="form-control" id="categoria" required  name="categoria"  placeholder="seleccione una opcion">
-																			<option disabled >----seleccione una opcion----</option>
-																			<option>Jardines</option>
-																			<option>Salones</option>
-																			<option>Generales</option>
-																			<option>Haciendas</option>
-																			<option>Promotores</option>
-																			<option>Empresar</option>
-																			<option>Otro</option>
-																			
-																		</select>
-																	</div>
-																</div>
-															</div>
-
-
-															<div class="row">
-										                                            <div class="col-md-6">
-															<div class="form-group">
-																<label for="exampleFormControlTextarea1">Observaciones</label>
-																<textarea class="form-control observaciones" name="observaciones"
-																	id="observaciones" rows="3"></textarea>
-															</div>
-															</div></div>
-										                                           
-										                                           
-										                                           
-										                                           
-										                                    </div>
-										                                    <hr>
-										                                </form>
-										                            </div>
-										                        </div>
-										                    </div>
-										                </div>
-														
-													</div>
-													
-                                                </from>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-success waves-effect" id="editarProveedor" >Editar</button>
-                                                <button type="button" class="btn btn-inverse waves-effect" data-dismiss="modal">Cancelar</button>
-                                            </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
-                   
-                   
-                   
-
-                      
-				<!-- ==========FIN modal de editar=================  -->
-		
-
-		
-
-
-
+	
 			</div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
@@ -567,16 +369,15 @@
  	<!-- <script src="../assets/plugins/sweetalert/jquery.sweet-alert.custom.js"></script>  -->
  	
  	<!-- <script type="text/javascript" src="http://jzaefferer.github.com/jquery-validation/jquery.validate.js"></script> -->
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="../assets/plugins/popper/popper.min.js"></script>
-    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    
+    <!-- Bootstrap tether Core JavaScript
+    <script src="../assets/plugins/popper/popper.min.js"></script>  -->
+     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>   
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="../js/jquery.slimscroll.js"></script>
     <!--Wave Effects -->
     <script src="../js/waves.js"></script>
-    <!--Menu sidebar -->
-    <script src="../js/sidebarmenu.js"></script>
+    <!--Menu sidebar  -->
+      <script src="../js/sidebarmenu.js"></script>   
     
     <!--stickey kit -->
     <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
@@ -606,8 +407,11 @@
 	$(document).ready(function() {
 	
 	    console.log( "ready!"+ $.fn.jquery);
+	    
+	   $("#agregarNuevo").text("Agregar Proveedor");
 
 	    $( "#target" ).click(function() {
+	    	
 	    	 $('#myModal').modal('show');
 	    });
 
@@ -619,10 +423,14 @@
 	    $( "#agregarNuevo" ).click(function() {
 	    //	
 
-	    	  jQuery.validator.messages.required = 'Este campo es obligatorio.';
-		  	   jQuery.validator.messages.number = 'Este campo debe ser num&eacute;rico.';
-		  	   jQuery.validator.messages.email = 'La direcci&oacute;n de correo es incorrecta.';
-		  	   jQuery.validator.messages.minlength = 'debe ingresar almenos 5 numeros';	 
+	    	  jQuery.validator.messages.required = '* Este campo es obligatorio.';
+		  	   jQuery.validator.messages.number = '* Este campo debe ser num&eacute;rico.';
+		  	   jQuery.validator.messages.email = '* La direcci&oacute;n de correo es incorrecta.';
+		  	   jQuery.validator.messages.minlength = '* debe ingresar almenos 5 numeros';	 
+		  	    $.validator.addMethod("selecs", function(value, element) {
+				    return value != -1;
+				}, "");
+		  	   
 	    	
 		        if( $("#agregar").valid()){
                        console.log("formlario limpio");
@@ -632,13 +440,19 @@
            	    	$("#agregar").find(":input").each(function() {
            	    	    
            	    	    info[this.name] = $(this).val();
-             
            	    	});
-           	    	var obj = JSON.stringify(info);
            	    	
+           	    	if( $("#provedorId").val()=="" &&  $("#direccionId").val()==""){
+           	    		alert("vacios");
+           	    		delete info.provedorId;
+           	    		delete info.direccionId;
+           	    	}
+           	    	var obj = JSON.stringify(info);
+           	    	alert(obj);
+                	
            	    	$.ajax({
            	    		
-           	    		url: "guardar",
+           	    		url: "guardarProvedor",
            	    		type: "post",
            	    		data: {
            	    			obj
@@ -652,7 +466,7 @@
            	    					console.log("----->entro");
            	    				 Swal.fire({
        	    					  title: 'Operacion realizada con exito!',
-       	    					  text: "se ha agregado un proveedor a la lista!",
+       	    					  text: "se ha agregado/Actualizado un proveedor a la lista!",
        	    					  icon: 'success',
        	    					  showCancelButton: false,
        	    					  confirmButtonColor: '#3085d6',
@@ -669,7 +483,7 @@
            	    				Swal.fire({
            	    				  icon: 'error',
            	    				  title: 'Oops...',
-           	    				  text: 'No se puedo agregar al provedor a la lista!'
+           	    				  text: 'No se puedo agregar/actualizar al provedor a la lista!'
            	    				})
            		    			
                	    			 
@@ -693,12 +507,14 @@
 	     $( "#editarProveedor" ).click(function() {
 
  	    	//event.preventDefault();
-
-	    	  jQuery.validator.messages.required = 'Este campo es obligatorio.';
-		  	  jQuery.validator.messages.number = 'Este campo debe ser num&eacute;rico.';
-		  	  jQuery.validator.messages.email = 'La direcci&oacute;n de correo es incorrecta.';
-		  	  jQuery.validator.messages.minlength = 'debe ingresar almenos 5 numeros';	 
-	    	
+               jQuery.validator.messages.required = '* Este campo es obligatorio.';
+		  	   jQuery.validator.messages.number = '* Este campo debe ser num&eacute;rico.';
+		  	   jQuery.validator.messages.email = '* La direcci&oacute;n de correo es incorrecta.';
+		  	   jQuery.validator.messages.minlength = '* debe ingresar almenos 5 numeros';	 
+		  	    $.validator.addMethod("selecs", function(value) {
+				    return value != -1;
+				}, "");
+			  
 		        if( $("#editarRegistro").valid()){
                     console.log("formlario limpio");
                     
@@ -712,7 +528,7 @@
         	 
         	    	$.ajax({
         	    		
-        	    		url: "guardar",
+        	    		url: "guardarProvedor",
         	    		type: "post",
         	    		data: {
         	    			obj
@@ -759,7 +575,7 @@
 	    });
 
 		    
-	});
+	});//fin de ready
 
 
 	 function validarFormulario2(){
@@ -772,9 +588,9 @@
   	 }
 
 	 
-	 function editar(id){//para mostrar
-	
-		 $('#myModalEdit').modal('show');
+	 function editar(id, categoria){//para mostrar
+		  $("#agregarNuevo").text("Editar Proveedor");
+		 $('#myModal').modal('show');
 		 
 		 $.ajax({
 	    		
@@ -793,18 +609,18 @@
 	    					console.log("----->entro we");
 	    					console.log("ID  -----> " + data.provedorId);
 	    					//return data;
-	    					 $(".provedorId").val(data.provedorId);
-                               $(".nombre").val(data.nombre);
-                             $(".correo").val(data.correo);
-                             $(".telefono").val(data.telefono);
-                             $(".categoria").val(data.categoria);
-                             $(".observaciones").val(data.observaciones);
-                             $(".direccionId").val(data.direccionId);
-                             $(".calle").val(data.calle);
-                             $(".colonia").val(data.colonia);
-                             $(".ciudad").val(data.ciudad);
-                             $(".estado").val(data.estado);
-                             $(".cp").val(data.cp);
+	    					 $("#provedorId").val(data.provedorId);
+                               $("#nombre").val(data.nombre);
+                             $("#correo").val(data.correo);
+                             $("#telefono").val(data.telefono);
+                             $("#observaciones").val(data.observaciones);
+                             $("#direccionId").val(data.direccionId);
+                             $("#calle").val(data.calle);
+                             $("#colonia").val(data.colonia);
+                             $("#ciudad").val(data.ciudad);
+                             $("#estado").val(data.estado);
+                             $("#cp").val(data.cp);
+                             $('[name=categoria]').val( data.categoria );
 	    				    
    		    			
 	    			 }else{

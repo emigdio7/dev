@@ -24,9 +24,7 @@ public class ProveedoresDaoImpl  extends GenericHibernateDAOImpl implements Prov
 
 	@Override
 	public String save(Proveedores provedor) {
-//
-//		System.out.println("idProveedor    ------------->  "+provedor.getProvedorId());
-//		System.out.println("idDireccion    ------------->  "+provedor.getProvedorId());
+
 		saveOrUpdate(provedor);
 		return provedor.getNombre();
 		

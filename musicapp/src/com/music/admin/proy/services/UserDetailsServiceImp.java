@@ -49,9 +49,9 @@ public class UserDetailsServiceImp implements UserDetailsService {
     System.out.println("Usuario : " + user);
     
     if (user != null) {
-    	System.out.println(" ------------------------------- " );
+    	System.out.println(" -------------------------------we " );
       builder = org.springframework.security.core.userdetails.User.withUsername(email);
-      System.out.println(" ------------------------------- " );
+      System.out.println(" -------------------------------we " );
       builder.disabled(!user.isEnabled());
       builder.password(user.getPasswordd());  
       

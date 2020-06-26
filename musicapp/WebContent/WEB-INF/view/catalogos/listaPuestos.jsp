@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <jsp:include page="../head.jsp" /> 
-
+ <link rel="stylesheet" type="text/css" href="../css/sweetalert2.min.css">
 <body class="fix-header fix-sidebar card-no-border" style="">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
@@ -40,10 +40,19 @@
                 
                 <!-- barra Head -->
                 <jsp:include page="../barraHead.jsp" />
+                
+                
 
                <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
+                <style>
+            			
+            			 .error {
+            			     color: red;
+            			 }	
+            			 
+                </style>
 
 				<div class="row">
                     <div class="col-lg-12">
@@ -52,8 +61,8 @@
                                 <h4 class="m-b-0 text-white">Edicion y Consulta de Catalogos de Puestos o Perfiles</h4>
                             </div>
                             <div class="card-body">
-                                <form:form method="post" action="/musicapp/catalogos/guardaPuestos" id="formPuestos" class="form-horizontal">
-                             	 <input type="hidden" name="rolId">
+                                <form id="formAdd">
+                             	 <input type="hidden" id="rolId" name="rolId">
                              	 <input type="hidden" name="action">
                                 
                                     <div class="form-body">
@@ -65,7 +74,7 @@
                                                     <label class="control-label text-right col-md-3">Descripcion</label>
                                                     <div class="col-md-9">
 <!--                                                         <input type="text" class="form-control" placeholder="John doe"> -->
-                                                        <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion del puesto" 
+                                                        <input type="text" class="form-control" name="descripcion" id="descripcion" required  placeholder="Descripcion del puesto" 
 				    			onkeypress="return validar(event)" >
                                                         <small class="form-control-feedback"> Nombre del Puesto </small> </div>
                                                 </div>
@@ -74,7 +83,7 @@
                                                 <div class="form-group row">
                                                     <label class="control-label text-right col-md-3">Estatus</label>
                                                     <div class="col-md-9">
-                                                        <select class="form-control" id="activo" name="activo">
+                                                        <select class="form-control" id="activo" data-rule-selecs="true" name="activo" required>
 															<option value="-1">Seleccione</option> 		
 															<option value="1">Activo</option>
 															<option value="0">Inactivo</option>
@@ -93,7 +102,7 @@
                                             <div class="col-md-12">
                                                 <div class="row">
                                                     <div class="col-md-offset-1 col-md-12">
-                                                        <button type="button" onclick="guarda()" class="btn btn-success">Guardar</button>
+                                                        <button type="button" id="agregarNuevo" class="btn btn-success">Guardar</button>
                                                         <button type="button" class="btn btn-inverse">Cancelar</button>
                                                     </div>
                                                 </div>
@@ -102,7 +111,7 @@
                                         </div>
                                     </div>
                                     
-                                </form:form>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -139,7 +148,7 @@
 										    		<td><span class="label label-danger">INACTIVO</span> </td>
 												</c:if>
 												
-												<td style="white-space:nowrap;" align="right">
+												<td style="white-space:nowrap;" align="left">
 						                            
 						                            <button type="button" onclick="edita(${puestos.rolId},'${puestos.descripcion}',${puestos.activo})" title="Editar Puesto" class="btn btn-outline-info btn-sm" >
 						                            	<i class="fa fa-edit"></i>
@@ -189,6 +198,7 @@
     <!-- All Jquery -->
     <!-- ============================================================== -->
  	<script src="../assets/plugins/jquery/jquery.min.js"></script>
+ 	<script src="../assets/plugins/jquery/jquery.validate.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="../assets/plugins/popper/popper.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
@@ -225,6 +235,7 @@
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="../assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    <script src="../assets/plugins/sweetalert/sweetalert.min.js"></script>
     
           	<!-- end - This is for export functionality only -->
 	<script>
@@ -244,6 +255,69 @@
 	</script>
 	
 	<script type="text/javascript">
+	//Evento para guardar o actulizar el registro
+	 $("#agregarNuevo").click(function() {
+		  event.preventDefault();
+		  
+		  jQuery.validator.messages.required = '* Este campo es obligatorio.';
+		  
+		  $.validator.addMethod("selecs", function(value, element) {
+			    var valor = element;
+			    console.log(valor);
+			    console.log(value);
+			    return value != -1;
+			}, "* Seleccione una opcion.");
+		
+	      if( $("#formAdd").valid()){
+		  	 	
+	    	$.ajax({
+	    		url: "guardaPuestos",
+	    		type: "post",
+	    		data: {
+	    			rolId:$('#rolId').val(),
+	    			descripcion:$("#descripcion").val(),
+	    	        activo:$('#activo').val()
+	    	       
+	    		},	
+	    		success : function(data){
+	    			console.log("data--->"+data);
+
+	    			
+	    			 if ("ok" == data) {
+		    			console.log("evento agregado con exito");
+		    	
+
+	    				 Swal.fire({
+	    					 position: 'center',
+ 	    					  type: 'success',
+ 	    					 title: "¡Operacion realizada con exito! Se Agrego/Actualizo un Evento.",
+ 	    					  showCancelButton: false,
+ 	    					  confirmButtonColor: '#3085d6',
+ 	    					  confirmButtonText: 'OK!'
+ 	    					}).then((result) => {
+ 	    					  if (result.value) {
+ 	    						  location.reload(); 
+ 	    					  }
+ 	    					})
+	    			  
+		    		
+
+	    			 }else{
+	    				 console.log("ha ocurrido un erro al agregar el evento");
+	    			 }
+	    			 
+	    		} 
+	    	});// fin ajax
+	    	
+	      }//fin del IF de validacion
+	      else{
+	    	  Swal.fire({ position: 'center', type: 'error', title: 'Complete todos los campos',showConfirmButton: false,timer: 1500});
+	      }
+	    	
+	    	
+	    });
+	
+	
 
 function validar(e) {
 	var tecla = (document.all) ? e.keyCode : e.which;
@@ -261,7 +335,7 @@ function edita(rolId, descripcion, activo) {
 	//Set
 	$('#rolId').val(rolId);
 	$('#action').val('insert');
-	$('#descripcion').val(descripcion);
+	$('#descripcion').val(descripcion).focus();
 	//$('#activo').val(activo);
 
 	//$('#activo').val('Activo').prop('selected', true);
@@ -271,12 +345,76 @@ function edita(rolId, descripcion, activo) {
 	
 }
 
-function elimina(rolId) {
 
-	$('#rolId').val(rolId);
-	$('#action').val('delete');
+function elimina(idRol) {
 	
-	$("#formPuestos").submit();
+	 Swal.fire({
+		  title: 'Estas seguro eliminar el puesto del catalogo?',
+		  text: "El puesto ya no existira en la lista!",
+		  type: 'warning',
+		//  icon: 'warning',
+		  showCancelButton: true,
+		  /*confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',*/
+		  confirmButtonText: 'Si, Eliminar el puesto!',
+		  cancelButtonText: 'No, cancelar!'
+		}).then((result) => {
+		  if (result.value) {
+			  console.log(result.value);
+			  
+			 	$.ajax({
+					url: "eliminarPuesto",
+					type: "post",
+					data: {
+						idRol:idRol
+					},	
+					success : function(data){
+						console.log("data--->"+data);
+
+						
+						 if ("ok" == data) {
+			    			console.log("Puesto eliminado con exito");
+			    			 // Swal.fire({ position: 'center', type: 'success', title: 'La información ha sido Actualizada',showConfirmButton: false,timer: 1500});
+			    			 
+			    			  
+			    				 Swal.fire({
+			    					 position: 'center',
+	       	    					  type: 'success',
+	       	    					 title: "se eliminado el puesto de la lista!",
+	       	    					  showCancelButton: false,
+	       	    					  confirmButtonColor: '#3085d6',
+	       	    					  confirmButtonText: 'OK!'
+	       	    					}).then((result) => {
+	       	    					  if (result.value) {
+	       	    						  location.reload(); 
+	       	    					  }
+	       	    					})
+			    			  
+			
+			    		
+
+						 }else{
+							 console.log("ha ocurrido un erro al eliminar el puesto");
+							 Swal.fire({ position: 'center', type: 'error', title: 'ha ocrrudo un error al eliminar el puesto',showConfirmButton: false,timer: 1500});
+						 }
+						 
+					} 
+				});// fin ajax
+
+			    
+	 	
+		  }else{
+			  
+			 console.log("no se eliminara");
+			  
+		  }
+		});
+
+
+	
+
+	
+	
 	
 }
 

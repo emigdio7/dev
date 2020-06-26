@@ -55,7 +55,7 @@ public class EmpleadosController {
 	public String listaEmpleados(Model modelo) {
 		logger.info("Mensaje de Lista de empleado");	
 		List<Empleados> lstEmp =  empleadosService.findAllEmpleados();
-		System.out.println(lstEmp);
+		//System.out.println("empleado: "+lstEmp.get(0).getRol().getDescripcion());
 		modelo.addAttribute("lstEmp", lstEmp);
 		modelo.addAttribute("seccion", "Empleados");
 		modelo.addAttribute("subSeccion", "Lista empleados");

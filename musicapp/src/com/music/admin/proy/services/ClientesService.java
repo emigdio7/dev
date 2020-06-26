@@ -15,6 +15,7 @@ package com.music.admin.proy.services;
 
 import java.util.List;
 
+import com.music.admin.proy.vo.ClienteDto;
 import com.music.admin.proy.vo.Clientes;
 import com.music.admin.proy.vo.Empleados;
 import com.music.admin.proy.vo.Llamadas;
@@ -37,7 +38,7 @@ public interface ClientesService {
 	
 	Clientes findIdLoadEventos(Integer clienteId);
 	
-	int save(Clientes  cliente);
+	int save(Clientes  clientes);
 	
 	int saveLlamada(Llamadas  llamada);
 	
@@ -48,6 +49,8 @@ public interface ClientesService {
 	int eliminaLlamada(Llamadas llamada);
 	
 	Clientes findOnlyClienteId(Integer clienteId);
+	
+	List<String> getEmailCliente();
 	
 	
 }

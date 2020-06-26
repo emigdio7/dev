@@ -28,6 +28,11 @@
 		<value>com/music/admin/proy/mappings/Empleados.hbm.xml</value>
 		<value>com/music/admin/proy/mappings/Authorities.hbm.xml</value>
 	   <value>com/music/admin/proy/mappings/Proveedores.hbm.xml</value>
+	     <value>com/music/admin/proy/mappings/CatCategoriaCliente.hbm.xml</value>
+	      <value>com/music/admin/proy/mappings/CatCategoriaProveedor.hbm.xml</value>
+	          <value>com/music/admin/proy/mappings/CatGeneroGrupos.hbm.xml</value>
+	            <value>com/music/admin/proy/mappings/Inventario.hbm.xml</value>
+	      
 		   
 	</util:list>
 	

@@ -19,10 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.music.admin.proy.daos.CatalogosDao;
-import com.music.admin.proy.daos.EmpleadosDao;
-import com.music.admin.proy.vo.Clientes;
-import com.music.admin.proy.vo.Empleados;
-import com.music.admin.proy.vo.Llamadas;
+import com.music.admin.proy.vo.CatCategoriaCliente;
+import com.music.admin.proy.vo.CatCategoriaProveedor;
+import com.music.admin.proy.vo.CatGeneroGrupos;
 import com.music.admin.proy.vo.Rol;
 import com.music.admin.proy.vo.TipoEvento;
 
@@ -38,6 +37,11 @@ public class CatalogosServiceImp implements CatalogosService {
 	 @Autowired
 	    private CatalogosDao catalogosDao;
 
+	 
+	      //  CAT PUESTOS
+	 
+	 
+	 
 		@Override
 		public List<Rol> findAllRol() {
 			return catalogosDao.findAllRol();
@@ -52,7 +56,18 @@ public class CatalogosServiceImp implements CatalogosService {
 		public int save(Rol rol) {
 			return catalogosDao.save(rol);
 		}
+		
+		@Override
+		public int deleteRol(Integer idRol) {
+			
+			return catalogosDao.deleteRol(idRol);
+		}
+		
 
+		
+		
+		//CAT TIPO EVENTO
+		
 		/*******************************************/
 		@Override
 		public List<TipoEvento> findAllEvento() {
@@ -69,5 +84,83 @@ public class CatalogosServiceImp implements CatalogosService {
 			return catalogosDao.save(evento);
 		}
 
+		@Override
+		public int saveCatalogoEventos(TipoEvento tipoEvento) {
+			tipoEvento.setUsuarioAlta("luis");
+			return catalogosDao.saveCatalogoEvento(tipoEvento);
+		}
+
+		@Override
+		public int deleteEventoById(Integer idevento) {
+	
+			return catalogosDao.deleteEventoById(idevento);
+			}
+		
+		
+		// CAT CATEGORIA CLIENTES
+
+		@Override
+		public List<CatCategoriaCliente> FindAllCategoriaCliente() {
+			// TODO Auto-generated method stub
+			return catalogosDao.FindAllCategoriaCliente();
+		}
+
+		@Override
+		public void saveCategoriaCliente(CatCategoriaCliente categoria) {
+			categoria.setUsuarioAlta("luis");
+			  catalogosDao.saveCategoriaCliente(categoria);
+			
+		}
+
+		@Override
+		public int deleteCategoriaCliente(Integer idCategoriaCliente) {
+			// TODO Auto-generated method stub
+			return catalogosDao.deleteCategoriaCliente(idCategoriaCliente);
+		}
+		
+		
+		// CAT CATEGORIA PROVEEDROES
+
+		@Override
+		public List<CatCategoriaProveedor> findAllCategoriasProvedor() {
+			// TODO Auto-generated method stub
+			return catalogosDao.findAllCategoriasProvedor();
+		}
+
+		@Override
+		public void saveCategoriaProveedor(CatCategoriaProveedor categoria) {
+			// TODO Auto-generated method stub
+			categoria.setUsuarioAlta("luis");
+			catalogosDao.saveCategoriaProveedor(categoria);
+			
+		}
+
+		@Override
+		public int deleteCategoriaProveedor(Integer idCategoriaProveedor) {
+			// TODO Auto-generated method stub
+			return catalogosDao.deleteCategoriaProveedor(idCategoriaProveedor);
+		}
+		
+		
+		// CAT GENERO GRUPOS
+
+		@Override
+		public List<CatGeneroGrupos> findAllGeneroGrupos() {
+			
+			return catalogosDao.findAllGeneroGrupos();
+		}
+
+		@Override
+		public void saveGeneroGrupo(CatGeneroGrupos genero) {
+			genero.setUsuarioAlta("luis");
+			catalogosDao.saveGeneroGrupo(genero);	
+		}
+
+		@Override
+		public int deleteGeneroGrupo(Integer idGeneroGrupo) {
+			return catalogosDao.deleteGeneroGrupo(idGeneroGrupo);
+		}
+
+		
 		
 }

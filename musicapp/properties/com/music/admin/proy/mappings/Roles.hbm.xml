@@ -12,9 +12,9 @@
         <property name="activo" type="java.lang.Integer">
             <column name="ACTIVO"/>
         </property>
-        <property name="claveEmpleado" type="string">
+      <!--    <property name="claveEmpleado" type="string">
             <column name="CLAVE_EMPLEADO"/>
-        </property>   
+        </property> -->  
         <!-- 
         <property name="classLabel" type="string">
             <column name="CLASS_LABEL"/>

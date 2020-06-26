@@ -46,6 +46,7 @@ public class Eventos implements java.io.Serializable {
 	private String category;
 	private String fechaCalendar;
 	private String fechaCalendarFin;
+	private String descripcion;
 	
 	
 	/**
@@ -312,7 +313,16 @@ public class Eventos implements java.io.Serializable {
 	public void setActivo(Integer activo) {
 		this.activo = activo;
 	}
+	
+	
+	
 
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */

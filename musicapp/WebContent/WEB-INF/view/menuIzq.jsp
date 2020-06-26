@@ -24,6 +24,9 @@
 
                 <!-- End User profile text-->
                 <!-- Sidebar navigation-->
+                
+                <div style="width: 100%; height: 78%;  overflow-y: scroll;">
+                
                 <nav class="sidebar-nav active">
                     <ul id="sidebarnav" class="in">
                         <li class="nav-small-cap">PERSONAL</li>
@@ -45,10 +48,10 @@
                         </li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-store"></i><span class="hide-menu">Inventario</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="<c:url value='/inventario/enContruccion.jsp'/>"><i class="mdi mdi-archive"></i>Manejo de Inventario</a></li>
+                                <li><a href="<c:url value='/inventario/articulos'/>"><i class="mdi mdi-archive"></i>Inventario Actual</a></li>
                                 <li><a href="<c:url value='/clientes/muestraClientes'/>"><i class="mdi mdi-package-up"></i>Salida de Inventario</a></li>
                                 <li><a href="<c:url value='/clientes/muestraClientes'/>"><i class="mdi mdi-package-down"></i>Ingreso de Inventario</a></li>
-                                <li><a href="<c:url value='/clientes/muestraClientes'/>"><i class="mdi mdi-bullseye"></i>Inventario Actual</a></li>
+                                <li><a href="<c:url value='/clientes/muestraClientes'/>"><i class="mdi mdi-bullseye"></i></a>Manejo de Inventario</li>
                             </ul>
                         </li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-office"></i><span class="hide-menu">Empleados</span></a>
@@ -87,11 +90,16 @@
                                 <li><a href="<c:url value='/catalogos/muestraClientes'/>">Egresos</a></li>
                                 <li><a href="<c:url value='/catalogos/muestraClientes'/>">Facturas</a></li>
                                 <li><a href="<c:url value='/catalogos/puestos'/>"> Puestos</a></li>
+                                 <li><a href="<c:url value='/catalogos/clientes'/>"> Categoria Cliente</a></li>
+                                 <li><a href="<c:url value='/catalogos/proveedores'/>"> Categoria de Proveedor</a></li>
+                                 <li><a href="<c:url value='/catalogos/generosGruperos'/>"> Genero Grupos</a></li>
+                                 
                             </ul>
                         </li>
                         
                     </ul>
                 </nav>
+                </div>
                 <!-- End Sidebar navigation -->
             </div>
                 <div class="slimScrollBar" style="background: rgb(220, 220, 220) none repeat scroll 0% 0%; width: 5px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; left: 1px; height: 535.56px;">

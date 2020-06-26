@@ -12,6 +12,7 @@ public class ProvedorDto implements Serializable{
 	
 	private Integer provedorId;
 	private String nombre;
+	private String apellidos;
 	private String telefono;
 	private String correo;
 	private String categoria;

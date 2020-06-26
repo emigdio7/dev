@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.music.admin.proy.forms.BusquedaForm;
+import com.music.admin.proy.services.CatalogosService;
 import com.music.admin.proy.services.ClientesService;
 import com.music.admin.proy.services.EventosService;
 import com.music.admin.proy.vo.Eventos;
@@ -52,6 +53,9 @@ public class AgendaController {
 	@Autowired
 	private EventosService eventosService;
 	
+	@Autowired
+	private CatalogosService catalogosService;
+	
 	@GetMapping(value = "/listaEventos")
 	public String listaEventos( ModelMap modelo) {
 		logger.info("muestra la lista de Eventos de los Clientes");
@@ -61,6 +65,7 @@ public class AgendaController {
 		modelo.addAttribute("lstEventos", lstEventos);
 		modelo.addAttribute("seccion", "Agenda");
 		modelo.addAttribute("subSeccion", "eventos");
+		modelo.addAttribute("lstEvnetos", catalogosService.findAllEvento());
 		
 		return "agenda/listaEventos";
 	}     
@@ -167,6 +172,7 @@ public class AgendaController {
 		evento.setUsuarioAlta(usuarioAlta);
 		//evento.setClienteId(Integer.parseInt(clienteId));
 		//evento.setTipoEvento(tipoEvento);
+		evento.setActivo(1);
 		
 		int id = eventosService.save(evento);
 		
@@ -222,7 +228,7 @@ public class AgendaController {
 		evento.setClienteId(Integer.parseInt(clienteId));
 	//	evento.setCategory("bg-Success");
 		//evento.setTipoEvento(tipoEvento);
-		
+		evento.setActivo(1);
 		int id = eventosService.save(evento);
 		
 		return "ok|"+id;

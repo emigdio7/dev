@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping auto-import="true" default-cascade="none" default-lazy="true">
+<hibernate-mapping auto-import="true" default-cascade="none" default-lazy="false">
     <class catalog="musicapp"  mutable="true" name="com.music.admin.proy.vo.Eventos"  polymorphism="implicit" table="EVENTOS">
         
         <id name="eventoId" type="java.lang.Integer">
@@ -57,7 +57,10 @@
         </many-to-one>
      <property name="category" >
             <column name="CATEGORY"/>
-        </property>  
+        </property> 
+         <property name="descripcion" >
+            <column name="DESCRIPCION"/>
+        </property> 
         
         
     </class>

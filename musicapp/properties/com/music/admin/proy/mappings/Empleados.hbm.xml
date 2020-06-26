@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping default-cascade="none" default-lazy="true">
+<hibernate-mapping default-cascade="none" default-lazy="false">
     <class catalog="musicapp"  mutable="true" name="com.music.admin.proy.vo.Empleados" table="EMPLEADOS">
     
         <id name="empleadoId">

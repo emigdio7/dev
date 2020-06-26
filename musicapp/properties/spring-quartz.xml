@@ -37,10 +37,10 @@
 	      <!-- Un trigger se asocia a un job mediante su identificador único -->
 	      <beans:property name="jobDetail" ref="uniqueJobIdentifier"/>
 	      <!-- Existen varias posibilidades en este punto. Nosotros trabajamos con expresiones cron definidas en un fichero properties para usar diferentes configuraciones según el entorno de ejecución -->
-	      <beans:property name="cronExpression" value="${properties.uniqueTriggerIdentifier.cronExpression}" />
-<!-- 	      <beans:property name="cronExpression" value="0/2 * * * * ?" /> -->
+	     <beans:property name="cronExpression" value="${properties.uniqueTriggerIdentifier.cronExpression}" />   
+ 	     <!-- <beans:property name="cronExpression" value="0 5 * * * ? " /> -->
 	</beans:bean>
-	<!-- ... otros triggers -->
+	<!-- ... otros triggers    15 * * * * ? -->
 	 
 	 
 	<!-- Configuración del sistema -->

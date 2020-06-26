@@ -56,11 +56,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.music.admin.proy.forms.ClienteView;
 import com.music.admin.proy.forms.ContratoForm;
+import com.music.admin.proy.services.CatalogosService;
 import com.music.admin.proy.services.ClientesService;
 import com.music.admin.proy.services.EmpleadosService;
 import com.music.admin.proy.services.EventosService;
 import com.music.admin.proy.services.ProveedoresService;
 import com.music.admin.proy.utils.Converter;
+import com.music.admin.proy.vo.CatCategoriaProveedor;
 import com.music.admin.proy.vo.ClienteDto;
 import com.music.admin.proy.vo.Clientes;
 import com.music.admin.proy.vo.Direccion;
@@ -69,6 +71,7 @@ import com.music.admin.proy.vo.Eventos;
 import com.music.admin.proy.vo.Llamadas;
 import com.music.admin.proy.vo.ProvedorDto;
 import com.music.admin.proy.vo.Proveedores;
+import com.music.admin.proy.vo.TipoEvento;
 
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JREmptyDataSource;
@@ -80,7 +83,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 
-/**
+/** 
  * Descripcion:
  * @author Victor Manuel Gonzalez Santamaria (victor.gonzalezsan@gmail.com)
  * @version 1.0
@@ -103,27 +106,61 @@ public class AdministracionController {
 	
 	@Autowired
 	private ProveedoresService proveedoresService;
+	
+	@Autowired
+	private CatalogosService catalogosService;
 
 	
 	@GetMapping(value = "/listaClientes")
 	public String listaClientes( ModelMap modelo, HttpServletRequest req ) {
 		logger.info("muestra la lista de contactos de los Clientes");
-		
+	
 		String cadena = req.getParameter("cadena");
 		logger.info(" =========== "+cadena +  " ===========" );
 		System.out.println(" =========== "+cadena +  " ===========" );
 		modelo.addAttribute("seccion", "Administracion");
 		modelo.addAttribute("subSeccion", "clientes");
+		modelo.addAttribute("lstCatClientes", catalogosService.FindAllCategoriaCliente());
 		List<Clientes> lstClientes =  null;
 		if (cadena!=null && !"".equals(cadena)) {
+			System.out.println("con like");
 			lstClientes =  clientesService.findClientesConLike(cadena);
 		} else {
+			System.out.println("sin like");
 			lstClientes =  clientesService.findAllClientes();
+		
 		}
 		 
 		modelo.addAttribute("lstClientes", lstClientes);
-		logger.info(lstClientes);
-		return "clientes/clientes";
+		System.out.println("CATEGORIA: "+lstClientes.get(0).getCategoria());
+		return "administracion/clientes";
+	}
+	
+	@RequestMapping(value ="/guardarCliente", method = RequestMethod.POST, consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+	public @ResponseBody String saveClientes(HttpServletRequest request) {
+		
+	
+		  Gson gson = new Gson();
+		  
+		  try {
+			  String ob =request.getParameter("obj").toString();
+			  
+			ClienteDto clienteDto = gson.fromJson(ob, ClienteDto.class);
+			 // Cliente
+//			  
+//			   System.out.println(" IDPROVEDOR  -------> "+provedor.getProvedorId());
+//			   System.out.println("   IDDIRECCION  -------> "+provedor.getDireccionId());
+//			   
+		 //         clientesService.save(clienteDto);
+			   
+			  return "success";
+			  
+		} catch (Exception e) {
+			System.out.println("no se puedo agregar al proveedor" );
+			e.printStackTrace();
+			return "error";
+		}
+		
 	}
  
 	
@@ -160,6 +197,12 @@ public class AdministracionController {
 		modelo.addAttribute("lstEventos", cliente.getEventoses());
 		
 		List<Llamadas> list = new ArrayList<Llamadas>(cliente.getLlamadases());
+		
+		//System.out.println("empleado: --> "+list.get(0).getLlamadaId());
+		//System.out.println("empleado: --> "+list.get(0).getClienteId());
+		
+	 // System.out.println("empleado: --> "+list.get(0).getEmpleado().getApellidoMat());
+	  
 		
 		Collections.sort(list, (new Comparator<Llamadas>() {
 		    @Override
@@ -210,6 +253,7 @@ public class AdministracionController {
 			
 		}
 		
+		modelo.addAttribute("lstEvnetos", catalogosService.findAllEvento());
 		
 		modelo.addAttribute("lstLlamadas", list);
 		modelo.addAttribute("seccion", "Administracion");
@@ -230,16 +274,20 @@ public class AdministracionController {
 	public String proveedores(ModelMap modelo) {
 		logger.info("muestra la lista de proveedores");	
 		
-		List<Proveedores> lstProveedores =new ArrayList<>();
+		List<Proveedores> lstProveedores = new ArrayList<>();
+		List<CatCategoriaProveedor> lstCateogria = new ArrayList<>();
 		try {
 			
 			lstProveedores = proveedoresService.findAll();
+			lstCateogria = catalogosService.findAllCategoriasProvedor();
+			
 			modelo.addAttribute("seccion", "Administracion");
 			modelo.addAttribute("lstProveedores", lstProveedores);
+			modelo.addAttribute("categorias", lstCateogria);
 			
 		}catch(Exception e) {
 			
-			modelo.addAttribute("error", "Error se encuentran Proveedores.");
+			modelo.addAttribute("error", "Error no se encuentran Proveedores.");
 			System.out.println("error al recuperar proveedores" );
 			e.printStackTrace();
 			
@@ -250,19 +298,17 @@ public class AdministracionController {
 	  
 	
 	
-	@RequestMapping(value ="/guardar", method = RequestMethod.POST, consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
+	@RequestMapping(value ="/guardarProvedor", method = RequestMethod.POST, consumes="application/json",headers = "content-type=application/x-www-form-urlencoded")
 	public @ResponseBody String save(HttpServletRequest request) {
 		
-	
 		  Gson gson = new Gson();
-		  
 		  try {
 			  String ob =request.getParameter("obj").toString();
 			  
 			  ProvedorDto provedor = gson.fromJson(ob, ProvedorDto.class);
 //			  
-//			   System.out.println(" IDPROVEDOR  -------> "+provedor.getProvedorId());
-//			   System.out.println("   IDDIRECCION  -------> "+provedor.getDireccionId());
+			//   System.out.println(" IDPROVEDOR  -------> "+provedor.getProvedorId());
+			 //  System.out.println("   IDDIRECCION  -------> "+provedor.getDireccionId());
 //			   
 			  proveedoresService.saveOrUpdate(provedor);
 			   
@@ -356,14 +402,15 @@ public class AdministracionController {
 	public String llamadas(ModelMap modelo) {
 		logger.info("Mensaje de Lista de empleado");	
 		List<Empleados> lstEmp =  empleadosService.findAllEmpleados();
-		logger.info(lstEmp);
+		//System.out.println("empleado: "+lstEmp.get(0).getRol().getDescripcion());
 		modelo.addAttribute("lstEmp", lstEmp);
 		modelo.addAttribute("liga", "/admin/listaEmpleados");
 		modelo.addAttribute("seccion", "Empleados");
 		modelo.addAttribute("subSeccion", "Lista empleados");
 		return "administracion/listaEmpleados";
 	}
-	
+	 
+	//postmaping
 	@PostMapping(value = "/llamadasEmpleado")
 	public String llamadasEmpleado(Model modelo,  @RequestParam Integer empleadoId) {
 		logger.info("Mensaje de Lista de llamadas por empleado");	
@@ -410,7 +457,8 @@ public class AdministracionController {
     		 @RequestParam String nombre, @RequestParam String apellidos,
     		 @RequestParam String correo, @RequestParam String telefono,
     		 @RequestParam String calle, @RequestParam String ciudad,
-    		 @RequestParam String colonia, @RequestParam String estado, @RequestParam String codigoPostal, @RequestParam String actualiza ) {
+    		 @RequestParam String colonia, @RequestParam String estado, @RequestParam String codigoPostal,
+    		 @RequestParam String categoria, @RequestParam String observaciones,  @RequestParam String actualiza) {
 			
 		System.out.println("en guardaInfo");
 		System.out.println("direccionId: " + direccionId);
@@ -423,6 +471,9 @@ public class AdministracionController {
 		System.out.println("estado: " + estado);
 		System.out.println("correo: " + correo);
 		System.out.println("telefono: " + telefono);
+		System.out.println("telefono: " + categoria);
+		System.out.println("telefono: " + observaciones);
+		
 		System.out.println("actualiza: " + actualiza);
 		
 		Clientes cliente = new Clientes();
@@ -432,8 +483,10 @@ public class AdministracionController {
 		cliente.setApellidos(apellidos);
 		cliente.setCorreo(correo);
 		cliente.setTelefono(telefono);
-		cliente.setObservaciones("Sin comentarios");
+		cliente.setCategoria(categoria);
+		cliente.setObservaciones(observaciones);
 		cliente.setUsuarioAlta("admin");
+		cliente.setActivo(1);
 		Direccion dir = new Direccion(calle,colonia, ciudad, estado); 
 		
 		if (direccionId != null && !"".equals(direccionId) )
@@ -592,6 +645,13 @@ public class AdministracionController {
 		System.out.println("tipoEvento: " +tipoEvento);
 		
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		
+		try {
+			format.parse(fechaEvento);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
 		Eventos evento = new Eventos();
 		if (eventoId!=null && eventoId>0)
@@ -602,7 +662,7 @@ public class AdministracionController {
 		evento.setAnticipo(Double.parseDouble(anticipo));
 		evento.setRestante(Double.parseDouble(restante));
 		evento.setTelefono(telefono);
-		evento.setFechaEvento(fechaEvento);
+		evento.setFechaEvento("2020/01/01");
 		evento.setLugarEvento(lugarEvento);
 		evento.setHoraInicio(horaInicio);
 		evento.setHoraFin(horaFin);
@@ -610,6 +670,10 @@ public class AdministracionController {
 		evento.setCamioneta(camioneta);
 		evento.setUsuarioAlta(usuarioAlta);
 		evento.setClienteId(Integer.parseInt(clienteId));
+		TipoEvento te = new TipoEvento();
+		te.setTipoEventoId(47);
+		evento.setTipoEvento(te);
+		evento.setDescripcion("privado");
 	//	evento.setCategory("bg-primary");
 		//evento.setTipoEvento(tipoEvento);
 		

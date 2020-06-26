@@ -37,6 +37,8 @@ public class Clientes implements java.io.Serializable {
 	private String apellidos;
 	private String telefono;
 	private String correo;
+	private String categoria;
+	private Integer activo;
 	private String observaciones;
 	private String usuarioAlta;
 	private Set<Llamadas> llamadases = new HashSet<Llamadas>(0);
@@ -68,6 +70,22 @@ public class Clientes implements java.io.Serializable {
 	}
 	
 	
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+
+	public Integer getActivo() {
+		return activo;
+	}
+
+	public void setActivo(Integer activo) {
+		this.activo = activo;
+	}
 
 	/**
 	 * @return the eventoses

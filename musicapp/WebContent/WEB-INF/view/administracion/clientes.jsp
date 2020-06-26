@@ -40,6 +40,13 @@
                 
                 <!-- barra Head -->
                 <jsp:include page="../barraHead.jsp" />
+                <style>
+            			
+            			 .error {
+            			     color: red;
+            			 }	
+            			 
+            			 </style>
 
                <!-- ============================================================== -->
                 <!-- Start Page Content -->
@@ -70,7 +77,7 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ><i class="mdi mdi-account-check"></i></button>
                                             <h4 class="modal-title" id="myModalLabel"> Agregarrr Cliente</h4> </div>
                                             <div class="modal-body">
-                                                <from class="form-horizontal form-material">
+                                                <from id="agregar" class="form-horizontal form-material">
                                        				<div class="container col-md-12">
 														<div class="row">
 										                    <div class="col-lg-12">
@@ -95,7 +102,7 @@
 										                                                <div class="form-group row">
 										                                                    <label class="control-label text-center col-md-2">Nombre(s)</label>
 										                                                    <div class="col-md-10">
-										                                                        <input type="text" class="form-control" id="nombre" placeholder="">
+										                                                        <input type="text" class="form-control" id="nombre" placeholder="" required>
 										                                                        <small class="form-control-feedback">Nombre del Cliente o Razon Social </small> </div>
 										                                                </div>
 										                                            </div>
@@ -109,7 +116,7 @@
 										                                               <div class="form-group row">
 										                                                    <label class="control-label text-center col-md-2">Apellidos</label>
 										                                                    <div class="col-md-10">
-										                                                        <input type="text" class="form-control" id="apellidos" placeholder="">
+										                                                        <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="" required>
 										                                                        <small class="form-control-feedback"> Apellidos o Descripcion del Grupo. </small> </div>
 										                                                </div>
 										                                            </div>
@@ -123,7 +130,7 @@
 										                                                <div class="form-group row">
 										                                                    <label class="control-label text-right col-md-3">Correo</label>
 										                                                    <div class="col-md-9">
-										                                                        <input type="text" class="form-control" id="correo" placeholder="">
+										                                                        <input type="email"  pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" class="form-control correo" id="correo" name="correo"  placeholder=""  required >
 										                                                        <small class="form-control-feedback">Correo Valido </small> </div>
 										                                                </div>
 										                                            </div>
@@ -132,22 +139,24 @@
 										                                                <div class="form-group row">
 										                                                    <label class="control-label text-right col-md-3">Telefono</label>
 										                                                    <div class="col-md-9">
-										                                                        <input type="text" class="form-control" id="telefono" placeholder="(777) 7777777">
+										                                                         <input type="number" class="form-control" id="telefono"  name="telefono"  placeholder="(777) 7777777"  required >
 										                                                        <small class="form-control-feedback"> Telefono de contacto </small> </div>
 										                                                </div>
 										                                            </div>
 										                                        </div>
+										                                        
+										                     
 										                                        										                                        
 										                                        
 										                                        <h3 class="box-title">Direcci&oacute;n</h3>
-										                                        <hr class="m-t-0 m-b-40">
+										                                       
 										                                        <!--/row-->
 										                                        <div class="row">
 										                                            <div class="col-md-6">
 										                                                <div class="form-group row">
 										                                                    <label class="control-label text-right col-md-3">Calle</label>
 										                                                    <div class="col-md-9">
-										                                                        <input type="text" id="calle" class="form-control">
+										                                                        <input type="text" id="calle" name="calle" class="form-control" required>
 										                                                    </div>
 										                                                </div>
 										                                            </div>
@@ -155,7 +164,7 @@
 										                                                <div class="form-group row">
 										                                                    <label class="control-label text-right col-md-3">Colonia</label>
 										                                                    <div class="col-md-9">
-										                                                        <input type="text" id="colonia" class="form-control">
+										                                                        <input type="text" id="colonia" name="colonia" class="form-control" required>
 										                                                    </div>
 										                                                </div>
 										                                            </div>
@@ -165,7 +174,7 @@
 										                                                <div class="form-group row">
 										                                                    <label class="control-label text-right col-md-3">Ciudad</label>
 										                                                    <div class="col-md-9">
-										                                                        <input type="text" id="ciudad" class="form-control">
+										                                                         <input type="text" id="ciudad" name="ciudad" class="form-control"  required >
 										                                                    </div>
 										                                                </div>
 										                                            </div>
@@ -174,7 +183,7 @@
 										                                                <div class="form-group row">
 										                                                    <label class="control-label text-right col-md-3">Estado</label>
 										                                                    <div class="col-md-9">
-										                                                        <input type="text" id="estado" class="form-control">
+										                                                        <input type="text" id="estado" name="estado" class="form-control" required>
 										                                                    </div>
 										                                                </div>
 										                                            </div>
@@ -186,7 +195,7 @@
 										                                                <div class="form-group row">
 										                                                    <label class="control-label text-right col-md-3">C. P.</label>
 										                                                    <div class="col-md-9">
-										                                                        <input type="text" id="codigoPostal" class="form-control">
+										                                                         <input type="number" id="codigoPostal" name="codigoPostal"  class="form-control" minlength="4" maxlength="9"  required >
 										                                                    </div>
 										                                                </div>
 										                                            </div>
@@ -198,9 +207,44 @@
 										                                            </div>
 										                                            <!--/span-->
 										                                        </div>
+										                                         <hr>
+										                                                           					<div class="row">
+										                                        					
+										                                        
+																<div class="col-md-6 ">
+																	<div class="form-group">
+																		<label for="exampleInputPassword1">Categoria</label>
+											                                      
+											                                <select data-rule-selecs="true"
+																			class="form-control" id="categoria" required
+																			name="categoria" placeholder="seleccione una opcion">
+																			<option value="-1">* Seleccione una Opcion</option>
+																			<c:forEach var="categoria" begin="0" items="${lstCatClientes}">
+																			<c:if test="${categoria.activo == '1' }">
+																			          <option>${categoria.descripcion}</option>
+																		    </c:if>
+																			</c:forEach>
+																
+																		</select>
+											                   
+																	</div>
+																</div>
+																
+															</div>
+															<div class="row">
+																<div class="col-md-6">
+																	<div class="form-group">
+																		<label for="exampleFormControlTextarea1">Observaciones</label>
+																		<textarea class="form-control" name="observaciones"
+																			id="observaciones" rows="3"></textarea>
+																	</div>
+																</div>
+															</div>
+										                                        
 										                                        <!--/row-->
 										                                    </div>
-										                                    <hr>
+										                                   
+										                                    
 										                                </form:form>
 										                            </div>
 										                        </div>
@@ -212,7 +256,7 @@
                                                 </from>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-success waves-effect" id="agregarNuevo" data-dismiss="modal">Guardar</button>
+                                                <button type="button" class="btn btn-success waves-effect" id="agregarNuevo">Guardar</button>
                                                 <button type="button" class="btn btn-inverse waves-effect" data-dismiss="modal">Cancelar</button>
                                             </div>
                                         </div>
@@ -225,7 +269,11 @@
                             </div>
                          </div>
                      </div>
+                     <!-- ==============Lista Clientes INICIO================= -->
                      
+              
+                     
+                      <!-- ==============Lista Clientes FIN================ -->
                               
                 </div>
                 <div class="row">
@@ -234,10 +282,21 @@
                         <div class="card card-body">
                             <div class="row">
                                 <div class="col-md-4 col-lg-3 text-center">
-                                    <a href="javascript:muestraCliente(${cliente.clienteId});"><img src="../assets/images/esfera.png" alt="user" class="img-circle img-responsive"></a>
+                                  <a href="javascript:muestraCliente(${cliente.clienteId});"> <img src="../assets/images/esfera.png" alt="user" class="img-circle img-responsive"></a>
                                 </div>
                                 <div class="col-md-8 col-lg-9">
-                                    <h3 class="box-title m-b-0">${cliente.nombre} </h3> <small>${cliente.apellidos}</small>
+                                  <div  class="row">
+                                   <div class="col-md-8"> <h3 class="box-title m-b-0">${cliente.nombre} </h3> </div>
+                                    <div class="col-md-4">
+                                   
+                                      <a href="javascript:muestraCliente(${cliente.clienteId});"> 
+                                    <button type="button"  title="Detalle del Cliente" class="btn btn-outline-info btn-sm" >
+						                            	<i class="fa fa-edit"></i>
+						             </button></a>
+                                    
+                                    </div>
+                                    </div>
+                                     <small>${cliente.apellidos}</small>
                                     <address>
                                         ${cliente.direccion.calle} ${cliente.direccion.colonia} ${cliente.direccion.ciudad} ${cliente.direccion.estado} ${cliente.direccion.codigop}
                                         <br/>
@@ -280,17 +339,19 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
- 	<script src="../assets/plugins/jquery/jquery.min.js"></script>
+ 	 	<script src="../assets/plugins/jquery/jquery.min.js"></script>
+ 	<script src="../assets/plugins/jquery/jquery.validate.min.js"></script>
     <script src="../assets/plugins/calendar/jquery-ui.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="../assets/plugins/popper/popper.min.js"></script>
-    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+      <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+  
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="../js/jquery.slimscroll.js"></script>
     <!--Wave Effects -->
     <script src="../js/waves.js"></script>
     <!--Menu sidebar -->
-    <script src="../js/sidebarmenu.js"></script>
+    <  <script src="../js/sidebarmenu.js"></script>  
     <!--stickey kit -->
     <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="../assets/plugins/sparkline/jquery.sparkline.min.js"></script>
@@ -317,7 +378,10 @@
 			clearTimeout(tiempo), tiempo = setTimeout(function() {
 				//n.innerHTML = buscar.value
 				$('#cadena').val(buscar.value);
-				$("#formClientes").submit();
+				if($('#cadena').val(buscar.value) != ""){
+					$("#formClientes").submit();
+				}
+				
 			}, 500)
 		}
 	}()
@@ -348,12 +412,24 @@ $(document).ready(function() {
 		$('#colonia').val('');
 		$('#estado').val('');
 		$('#codigoPostal').val('');
+		$('#categoria').val('');
+		$('#observaciones').val('');
 		$('#actualiza').val(0);
 	});
 
 	
 	//Evento para guardar o actulizar el registro
 	 $("#agregarNuevo").click(function() {
+		   event.preventDefault();
+		  console.log("metodo");
+		  jQuery.validator.messages.required = '* Este campo es obligatorio.';
+	  	   jQuery.validator.messages.number = '* Este campo debe ser num&eacute;rico.';
+	  	   jQuery.validator.messages.email = '* La direcci&oacute;n de correo es incorrecta.';
+	  	   jQuery.validator.messages.minlength = '* debe ingresar almenos 5 numeros';	 
+	  	
+	      if( $("#formClientes").valid()){
+                  console.log("formlario limpio");
+               
 		 	
 			console.log('en boton');
 	    	$.ajax({
@@ -371,7 +447,10 @@ $(document).ready(function() {
 	    			colonia:$('#colonia').val(),
 	    			estado:$('#estado').val(),
 	    			codigoPostal:$('#codigoPostal').val(),
+	    			categoria:$('#categoria').val(),
+	    			observaciones:$('#observaciones').val(),
 	    			actualiza:$('#actualiza').val()
+	    			
 	    		},	
 	    		success : function(data){
 	    			console.log(data);
@@ -390,10 +469,74 @@ $(document).ready(function() {
 	    			 }
 	    			 
 	    		} 
-	    	});
-	    });
+	    	});//fin de ajax
+	    	
+	      }//fin de IF de validacion
+	      else{
+	    	  console.log("form sucio");
+	      }
+	    	
+	    });//fin de la funcion
 	
-});
+	
+});//fin de ready 
+
+function eliminar(id) {
+    const swalWithBootstrapButtons = Swal.mixin({
+     	  customClass: {
+     	    confirmButton: 'btn btn-success',
+     	    cancelButton: 'btn btn-danger'
+     	  },
+     	  buttonsStyling: false
+     	})
+
+     	swalWithBootstrapButtons.fire({
+     	  title: 'Eliminar?',
+     	  text: "Deseas eliminar este proveedor de la base de datos?",
+     	  icon: 'warning',
+     	  showCancelButton: true,
+     	  confirmButtonText: 'Si, Eliminar Ahora!',
+     	  cancelButtonText: 'No, cancelar!',
+     	  reverseButtons: true
+     	}).then((result) => {
+     	  if (result.value) {
+     		  
+     			$.ajax({
+     	    		url: "eliminarProvedor",
+     	    		type: "post",
+     	    		data: {
+     	    			id
+     	    		},	
+     	    		success : function(data){
+     	    			console.log("----->"+data);
+     	    			 if ("success" == data) {
+     	    				 
+     	    				 Swal.fire({
+     	    					  title: 'ELiminado!',
+     	    					  text: "se ha eliminado un proveedor de la lista!",
+     	    					  icon: 'success',
+     	    					  showCancelButton: false,
+     	    					  confirmButtonColor: '#3085d6',
+     	    					  confirmButtonText: 'OK!'
+     	    					}).then((result) => {
+     	    					  if (result.value) {
+     	    						  
+     	    						  location.reload(); //refrescamos la pagina para que se refresque la tabla
+     	    					  }
+     	    					})
+     	    				
+     	    			 }else{
+     	    				 Swal.fire({
+               	    				  icon: 'error',
+               	    				  title: 'Oops...',
+               	    				  text: 'No se puedo eliminar al provedor a la lista!'
+     	    				 })	     //
+        	    			 }	 
+     	    		}
+     	    	});//FIN AJAX
+     	  } 
+     	})		
+}
 // 	var appendEl = $("<div class='row'></div>").appendTo("#imageContent");
 	   
 // 	for (var i = 0, j = 10; i < j; i++){
@@ -426,4 +569,6 @@ $(document).ready(function() {
 
 
 </body></html>
+
+
 
